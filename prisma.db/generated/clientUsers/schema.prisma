@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "./generated/clientUsers"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+
+datasource users {
+  provider = "postgresql"
+  url      = env("USERS_DB_URL")
+  directUrl = env("USERS_DIRECT_URL")
+}
+
+
+model User {
+  id            String    @id @default(uuid()) @users.Uuid
+  email         String    @unique
+  hash          String
+  login         String
+  hashedRt      String?
+  likedPosts    String[]  @default([])
+  feedPosts     String[]  @default([])
+  profile       Profile?
+}
+
+model Profile {
+  user           User        @relation(fields: [userId], references: [id])
+  userId         String      @id  @users.Uuid
+  unProvedSkills Skills[]
+  provedSkills   Skills[]
+  achievements   Achievements[]
+  education      String
+  codeLanguages  codeLanguages[]
+}
+
+enum Skills {
+  noSkills
+  python
+  java
+  go
+  kotlin
+  cpp
+  javascript
+  typescript
+}
+
+enum Achievements {
+  noAchievements
+  apple
+  microsoft
+  senior
+  middle
+  teamlead
+  amazon
+}
+
+enum codeLanguages {
+  noCodeLanguages
+  python
+  java
+  go
+  kotlin
+  cpp
+  javascript
+  typescript
+
+}

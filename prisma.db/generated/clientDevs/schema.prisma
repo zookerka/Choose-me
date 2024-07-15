@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "./generated/clientDevs"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+
+datasource devs {
+  provider = "postgresql"
+  url      = env("DEVS_DB_URL")
+  directUrl = env("DEVS_DIRECT_URL")
+}
+
+
+model dev {
+  id                String    @id @default(uuid()) @devs.Uuid
+  authorId          String    @unique
+  name              String
+  body              String
+  unProvedSkills    Skills[]  @default([])
+  provedSkills      Skills[]  @default([])
+  achievements      Achievements[]  @default([])
+  enabled           Boolean   @default(true)
+}
+
+model devsIdCollection {
+  devId             String    @unique
+}
+
+enum Skills {
+  noSkills
+  python
+  java
+  go
+  kotlin
+  cpp
+  javascript
+  typescript
+}
+
+
+enum Achievements {
+  noAchievements
+  apple
+  microsoft
+  senior
+  middle
+  teamlead
+  amazon
+}

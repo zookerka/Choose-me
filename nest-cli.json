@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/devs/search/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "projects": {
+    "devs/search": {
+      "type": "application",
+      "root": "apps/devs/search",
+      "entryFile": "main",
+      "sourceRoot": "apps/devs/search/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/devs/search/tsconfig.app.json"
+      }
+    },
+    "auth": {
+      "type": "application",
+      "root": "apps/auth",
+      "entryFile": "main",
+      "sourceRoot": "apps/auth/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/auth/tsconfig.app.json"
+      }
+    },
+    "common": {
+      "type": "library",
+      "root": "libs/common",
+      "entryFile": "index",
+      "sourceRoot": "libs/common/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/common/tsconfig.lib.json"
+      }
+    },
+    "devs/create-card": {
+      "type": "application",
+      "root": "apps/devs/create-card",
+      "entryFile": "main",
+      "sourceRoot": "apps/devs/create-card/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/devs/create-card/tsconfig.app.json"
+      }
+    }
+  }
+}
