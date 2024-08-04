@@ -121,9 +121,15 @@ exports.Prisma.ProfileScalarFieldEnum = {
   userId: 'userId',
   unProvedSkills: 'unProvedSkills',
   provedSkills: 'provedSkills',
-  achievements: 'achievements',
   education: 'education',
-  codeLanguages: 'codeLanguages'
+  name: 'name',
+  surname: 'surname',
+  age: 'age',
+  positions: 'positions',
+  workExp: 'workExp',
+  workPlaces: 'workPlaces',
+  filledProfile: 'filledProfile',
+  otherLinks: 'otherLinks'
 };
 
 exports.Prisma.SortOrder = {
@@ -142,27 +148,6 @@ exports.Prisma.NullsOrder = {
 };
 exports.Skills = exports.$Enums.Skills = {
   noSkills: 'noSkills',
-  python: 'python',
-  java: 'java',
-  go: 'go',
-  kotlin: 'kotlin',
-  cpp: 'cpp',
-  javascript: 'javascript',
-  typescript: 'typescript'
-};
-
-exports.Achievements = exports.$Enums.Achievements = {
-  noAchievements: 'noAchievements',
-  apple: 'apple',
-  microsoft: 'microsoft',
-  senior: 'senior',
-  middle: 'middle',
-  teamlead: 'teamlead',
-  amazon: 'amazon'
-};
-
-exports.codeLanguages = exports.$Enums.codeLanguages = {
-  noCodeLanguages: 'noCodeLanguages',
   python: 'python',
   java: 'java',
   go: 'go',

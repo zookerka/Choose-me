@@ -1,7 +1,7 @@
 generator client {
   provider = "prisma-client-js"
   output = "./generated/clientDevs"
-  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  binaryTargets = ["native", "debian-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
 }
 
 
@@ -14,18 +14,20 @@ datasource devs {
 
 model dev {
   id                String    @id @default(uuid()) @devs.Uuid
-  authorId          String    @unique
+  userId            String    @unique
   name              String
   body              String
-  unProvedSkills    Skills[]  @default([])
-  provedSkills      Skills[]  @default([])
-  achievements      Achievements[]  @default([])
   enabled           Boolean   @default(true)
+  unProvedSkills    Skills[]
+  provedSkills      Skills[]
+  education         String[]
+  positions         String[]
+  workExp           Int?
+  workPlaces        String[]
+  otherLinks        String[]
+
 }
 
-model devsIdCollection {
-  devId             String    @unique
-}
 
 enum Skills {
   noSkills
@@ -36,15 +38,4 @@ enum Skills {
   cpp
   javascript
   typescript
-}
-
-
-enum Achievements {
-  noAchievements
-  apple
-  microsoft
-  senior
-  middle
-  teamlead
-  amazon
 }

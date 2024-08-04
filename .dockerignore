@@ -1,0 +1,10 @@
+.git
+.gitignore
+.dockerignore
+*.yaml
+
+dist.do
+node_modules
+
+*.env
+

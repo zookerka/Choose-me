@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { PrismaServiceDevs, PrismaServiceUsers } from '@app/common';
 import { CreateDevDto } from './dto/create.dev.dto';
 // import { Achievements, dev } from 'prisma.db/generated/clientDevs';
@@ -25,14 +30,27 @@ export class DevsNewCardService {
         },
       });
 
+      // check for duplicate to avoid more than one card for each user
+      const duplicate_check = await this.prismaServiceDevs.dev.findUnique({
+        where: {
+          userId: userId,
+        },
+      });
+      if (duplicate_check) {
+        throw new ConflictException('You already have a card');
+      }
+
       const newDev = await this.prismaServiceDevs.dev.create({
         data: {
           name: createDevDto.name,
           body: createDevDto.body,
-          authorId: userId,
+          userId: userId,
           unProvedSkills: userProfile.provedSkills,
           provedSkills: userProfile.provedSkills,
-          achievements: userProfile.achievements,
+          positions: userProfile.positions,
+          workExp: userProfile.workExp,
+          workPlaces: userProfile.workPlaces,
+          otherLinks: userProfile.otherLinks,
         },
       });
       if (!newDev) {
@@ -43,9 +61,5 @@ export class DevsNewCardService {
       this.logger.error('Error in createDev:');
       throw new error('Access denied');
     }
-  }
-
-  async testFunction() {
-    return 'Hello';
   }
 }

@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "./generated/clientCatalog"
+  binaryTargets = ["native", "debian-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+}
+
+datasource catalog {
+  provider = "postgresql"
+  url      = env("CATALOG_DB_URL")
+  directUrl = env("CATALOG_DIRECT_URL")
+}
+
+model Companies {
+  id            String    @id @default(uuid()) @catalog.Uuid  
+  companyName   String    @unique
+}
+
+model Positions {
+  id            String    @id @default(uuid()) @catalog.Uuid  
+  positionName  String    @unique
+}
+
+model CompaniesOnReview {
+  id            String    @id @default(uuid()) @catalog.Uuid  
+  companyName   String    @unique
+}
+
+model PositionsOnReview {
+  id            String    @id @default(uuid()) @catalog.Uuid  
+  positionName  String    @unique
+}

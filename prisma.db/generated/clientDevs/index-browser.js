@@ -109,17 +109,17 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.DevScalarFieldEnum = {
   id: 'id',
-  authorId: 'authorId',
+  userId: 'userId',
   name: 'name',
   body: 'body',
+  enabled: 'enabled',
   unProvedSkills: 'unProvedSkills',
   provedSkills: 'provedSkills',
-  achievements: 'achievements',
-  enabled: 'enabled'
-};
-
-exports.Prisma.DevsIdCollectionScalarFieldEnum = {
-  devId: 'devId'
+  education: 'education',
+  positions: 'positions',
+  workExp: 'workExp',
+  workPlaces: 'workPlaces',
+  otherLinks: 'otherLinks'
 };
 
 exports.Prisma.SortOrder = {
@@ -130,6 +130,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 exports.Skills = exports.$Enums.Skills = {
   noSkills: 'noSkills',
@@ -142,19 +147,8 @@ exports.Skills = exports.$Enums.Skills = {
   typescript: 'typescript'
 };
 
-exports.Achievements = exports.$Enums.Achievements = {
-  noAchievements: 'noAchievements',
-  apple: 'apple',
-  microsoft: 'microsoft',
-  senior: 'senior',
-  middle: 'middle',
-  teamlead: 'teamlead',
-  amazon: 'amazon'
-};
-
 exports.Prisma.ModelName = {
-  dev: 'dev',
-  devsIdCollection: 'devsIdCollection'
+  dev: 'dev'
 };
 
 /**

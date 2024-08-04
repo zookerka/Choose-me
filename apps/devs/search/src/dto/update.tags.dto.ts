@@ -1,5 +1,12 @@
-import { IsEnum, IsOptional } from 'class-validator';
-import { Achievements, Skills } from 'prisma.db/generated/clientUsers';
+import {
+  ArrayNotEmpty,
+  IsArray,
+  IsEnum,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from 'class-validator';
+import { Skills } from 'prisma.db/generated/clientUsers';
 
 export class UpdateTagsDto {
   @IsOptional()
@@ -11,6 +18,20 @@ export class UpdateTagsDto {
   provedSkills: Skills[];
 
   @IsOptional()
-  @IsEnum(Achievements, { each: true })
-  achievements: Achievements[];
+  @IsArray()
+  @IsString({ each: true })
+  education: string[];
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  positions: string[];
+
+  @IsOptional()
+  workExp: number;
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  workPlaces: string[];
 }

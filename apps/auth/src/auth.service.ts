@@ -2,15 +2,11 @@ import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import { PrismaServiceUsers } from '@app/common';
 import { AuthSignupDto } from './dto/auth.signup.dto';
 import * as argon from 'argon2';
-import { Tokens } from '../../../libs/common/src/tokens.type';
+import { Tokens } from '../../../libs/common/src/types/tokens.type';
 import { JwtService } from '@nestjs/jwt';
 import { AuthSigninDto } from './dto/auth.signin.dto';
 import { JwtPayload } from '@app/common';
-import {
-  Achievements,
-  Skills,
-  codeLanguages,
-} from 'prisma.db/generated/clientUsers';
+import { Skills } from 'prisma.db/generated/clientUsers';
 import { User } from 'prisma.db/generated/clientUsers';
 import { ConfigService } from '@nestjs/config';
 
@@ -88,7 +84,7 @@ export class AuthService {
   }
 
   /**
-   * This functions is creating new User
+   * This functions is creating new User and empty profile
    * @param authSignupDto Dto for registration
    * @returns Returns new user
    */
@@ -102,13 +98,14 @@ export class AuthService {
           hash: hash,
         },
       });
+      // everything here is by default, but for clarity put here default data.
+      // you can check default data in backend/prisma.db/schemaUsers.prisma
       const newProfile = await this.prismaServiceUsers.profile.create({
         data: {
-          unProvedSkills: [Skills.noSkills],
-          provedSkills: [Skills.noSkills],
-          achievements: [Achievements.noAchievements],
-          education: 'noEducation',
-          codeLanguages: [codeLanguages.noCodeLanguages],
+          workPlaces: [],
+          positions: [],
+          unProvedSkills: [],
+          provedSkills: [],
           userId: newUser.id,
         },
       });

@@ -6,10 +6,10 @@ import { APP_FILTER } from '@nestjs/core';
 import { SentryService } from 'libs/common/sentry/sentry.service';
 import { PrismaModule } from '@app/common';
 import { ConfigModule } from '@nestjs/config';
-import { configOptions } from 'libs/common/config/config-options';
+// import { configOptions } from 'libs/common/global-config/config-options';
 
 @Module({
-  imports: [PrismaModule, ConfigModule.forRoot(configOptions)],
+  imports: [PrismaModule, ConfigModule.forRoot()],
   controllers: [DevsSearchController],
   providers: [
     DevsSearchService,

@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { PrismaServiceDevs, PrismaServiceUsers } from '@app/common';
 import { UpdateTagsDto } from './dto/update.tags.dto';
-import { Achievements, dev } from 'prisma.db/generated/clientDevs';
+import { dev } from 'prisma.db/generated/clientDevs';
 import { Skills } from 'prisma.db/generated/clientUsers';
 
 @Injectable()
@@ -17,16 +17,8 @@ export class DevsSearchService {
    */
   async searchDevs(updateTagsDto: UpdateTagsDto): Promise<dev[]> {
     try {
-      const unProvedSkills = updateTagsDto.unProvedSkills?.length
-        ? updateTagsDto.unProvedSkills
-        : [Skills.noSkills];
-      const provedSkills = updateTagsDto.provedSkills?.length
-        ? updateTagsDto.provedSkills
-        : [Skills.noSkills];
-      const achievements = updateTagsDto.achievements?.length
-        ? updateTagsDto.achievements
-        : [Achievements.noAchievements];
-
+      const unProvedSkills = updateTagsDto.unProvedSkills;
+      const provedSkills = updateTagsDto.provedSkills;
       const devs = await this.prismaServiceDevs.dev.findMany({
         where: {
           enabled: true,
@@ -36,8 +28,17 @@ export class DevsSearchService {
           provedSkills: {
             hasEvery: provedSkills,
           },
-          achievements: {
-            hasEvery: achievements,
+          education: {
+            hasEvery: updateTagsDto.education,
+          },
+          positions: {
+            hasEvery: updateTagsDto.positions,
+          },
+
+          workExp: updateTagsDto.workExp,
+
+          workPlaces: {
+            hasEvery: updateTagsDto.workPlaces,
           },
         },
       });

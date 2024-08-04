@@ -8,13 +8,14 @@ import { SentryService } from 'libs/common/sentry/sentry.service';
 import { APP_FILTER } from '@nestjs/core';
 import { AllExceptionsFilter } from 'libs/common/sentry/all-exceptions.filter';
 import { ConfigModule } from '@nestjs/config';
-import { configOptions } from 'libs/common/config/config-options';
 
 @Module({
   imports: [
     JwtModule.register({}),
     PrismaModule,
-    ConfigModule.forRoot(configOptions),
+    ConfigModule.forRoot({
+      envFilePath: ['.env', 'apps/auth/.env'],
+    }),
   ],
   controllers: [AuthController],
   providers: [

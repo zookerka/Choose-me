@@ -1,7 +1,7 @@
 generator client {
   provider = "prisma-client-js"
   output = "./generated/clientUsers"
-  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  binaryTargets = ["native", "debian-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
 }
 
 
@@ -24,13 +24,19 @@ model User {
 }
 
 model Profile {
-  user           User        @relation(fields: [userId], references: [id])
-  userId         String      @id  @users.Uuid
+  user           User         @relation(fields: [userId], references: [id])
+  userId         String       @id @users.Uuid
   unProvedSkills Skills[]
   provedSkills   Skills[]
-  achievements   Achievements[]
-  education      String
-  codeLanguages  codeLanguages[]
+  education      String[]
+  name           String?
+  surname        String?
+  age            Int?
+  positions      String[]
+  workExp        Int?
+  workPlaces     String[]
+  otherLinks     String[]
+  filledProfile  Boolean      @default(false)
 }
 
 enum Skills {
@@ -42,26 +48,4 @@ enum Skills {
   cpp
   javascript
   typescript
-}
-
-enum Achievements {
-  noAchievements
-  apple
-  microsoft
-  senior
-  middle
-  teamlead
-  amazon
-}
-
-enum codeLanguages {
-  noCodeLanguages
-  python
-  java
-  go
-  kotlin
-  cpp
-  javascript
-  typescript
-
 }

@@ -41,46 +41,11 @@ export namespace $Enums {
 
 export type Skills = (typeof Skills)[keyof typeof Skills]
 
-
-export const Achievements: {
-  noAchievements: 'noAchievements',
-  apple: 'apple',
-  microsoft: 'microsoft',
-  senior: 'senior',
-  middle: 'middle',
-  teamlead: 'teamlead',
-  amazon: 'amazon'
-};
-
-export type Achievements = (typeof Achievements)[keyof typeof Achievements]
-
-
-export const codeLanguages: {
-  noCodeLanguages: 'noCodeLanguages',
-  python: 'python',
-  java: 'java',
-  go: 'go',
-  kotlin: 'kotlin',
-  cpp: 'cpp',
-  javascript: 'javascript',
-  typescript: 'typescript'
-};
-
-export type codeLanguages = (typeof codeLanguages)[keyof typeof codeLanguages]
-
 }
 
 export type Skills = $Enums.Skills
 
 export const Skills: typeof $Enums.Skills
-
-export type Achievements = $Enums.Achievements
-
-export const Achievements: typeof $Enums.Achievements
-
-export type codeLanguages = $Enums.codeLanguages
-
-export const codeLanguages: typeof $Enums.codeLanguages
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1950,48 +1915,98 @@ export namespace Prisma {
 
   export type AggregateProfile = {
     _count: ProfileCountAggregateOutputType | null
+    _avg: ProfileAvgAggregateOutputType | null
+    _sum: ProfileSumAggregateOutputType | null
     _min: ProfileMinAggregateOutputType | null
     _max: ProfileMaxAggregateOutputType | null
   }
 
+  export type ProfileAvgAggregateOutputType = {
+    age: number | null
+    workExp: number | null
+  }
+
+  export type ProfileSumAggregateOutputType = {
+    age: number | null
+    workExp: number | null
+  }
+
   export type ProfileMinAggregateOutputType = {
     userId: string | null
-    education: string | null
+    name: string | null
+    surname: string | null
+    age: number | null
+    workExp: number | null
+    filledProfile: boolean | null
   }
 
   export type ProfileMaxAggregateOutputType = {
     userId: string | null
-    education: string | null
+    name: string | null
+    surname: string | null
+    age: number | null
+    workExp: number | null
+    filledProfile: boolean | null
   }
 
   export type ProfileCountAggregateOutputType = {
     userId: number
     unProvedSkills: number
     provedSkills: number
-    achievements: number
     education: number
-    codeLanguages: number
+    name: number
+    surname: number
+    age: number
+    positions: number
+    workExp: number
+    workPlaces: number
+    filledProfile: number
+    otherLinks: number
     _all: number
   }
 
 
+  export type ProfileAvgAggregateInputType = {
+    age?: true
+    workExp?: true
+  }
+
+  export type ProfileSumAggregateInputType = {
+    age?: true
+    workExp?: true
+  }
+
   export type ProfileMinAggregateInputType = {
     userId?: true
-    education?: true
+    name?: true
+    surname?: true
+    age?: true
+    workExp?: true
+    filledProfile?: true
   }
 
   export type ProfileMaxAggregateInputType = {
     userId?: true
-    education?: true
+    name?: true
+    surname?: true
+    age?: true
+    workExp?: true
+    filledProfile?: true
   }
 
   export type ProfileCountAggregateInputType = {
     userId?: true
     unProvedSkills?: true
     provedSkills?: true
-    achievements?: true
     education?: true
-    codeLanguages?: true
+    name?: true
+    surname?: true
+    age?: true
+    positions?: true
+    workExp?: true
+    workPlaces?: true
+    filledProfile?: true
+    otherLinks?: true
     _all?: true
   }
 
@@ -2033,6 +2048,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ProfileAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProfileSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ProfileMinAggregateInputType
@@ -2063,6 +2090,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ProfileCountAggregateInputType | true
+    _avg?: ProfileAvgAggregateInputType
+    _sum?: ProfileSumAggregateInputType
     _min?: ProfileMinAggregateInputType
     _max?: ProfileMaxAggregateInputType
   }
@@ -2071,10 +2100,18 @@ export namespace Prisma {
     userId: string
     unProvedSkills: $Enums.Skills[]
     provedSkills: $Enums.Skills[]
-    achievements: $Enums.Achievements[]
-    education: string
-    codeLanguages: $Enums.codeLanguages[]
+    education: string[]
+    name: string | null
+    surname: string | null
+    age: number | null
+    positions: string[]
+    workExp: number | null
+    workPlaces: string[]
+    filledProfile: boolean
+    otherLinks: string[]
     _count: ProfileCountAggregateOutputType | null
+    _avg: ProfileAvgAggregateOutputType | null
+    _sum: ProfileSumAggregateOutputType | null
     _min: ProfileMinAggregateOutputType | null
     _max: ProfileMaxAggregateOutputType | null
   }
@@ -2097,9 +2134,15 @@ export namespace Prisma {
     userId?: boolean
     unProvedSkills?: boolean
     provedSkills?: boolean
-    achievements?: boolean
     education?: boolean
-    codeLanguages?: boolean
+    name?: boolean
+    surname?: boolean
+    age?: boolean
+    positions?: boolean
+    workExp?: boolean
+    workPlaces?: boolean
+    filledProfile?: boolean
+    otherLinks?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["profile"]>
 
@@ -2107,9 +2150,15 @@ export namespace Prisma {
     userId?: boolean
     unProvedSkills?: boolean
     provedSkills?: boolean
-    achievements?: boolean
     education?: boolean
-    codeLanguages?: boolean
+    name?: boolean
+    surname?: boolean
+    age?: boolean
+    positions?: boolean
+    workExp?: boolean
+    workPlaces?: boolean
+    filledProfile?: boolean
+    otherLinks?: boolean
   }
 
   export type ProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2126,9 +2175,15 @@ export namespace Prisma {
       userId: string
       unProvedSkills: $Enums.Skills[]
       provedSkills: $Enums.Skills[]
-      achievements: $Enums.Achievements[]
-      education: string
-      codeLanguages: $Enums.codeLanguages[]
+      education: string[]
+      name: string | null
+      surname: string | null
+      age: number | null
+      positions: string[]
+      workExp: number | null
+      workPlaces: string[]
+      filledProfile: boolean
+      otherLinks: string[]
     }, ExtArgs["result"]["profile"]>
     composites: {}
   }
@@ -2527,9 +2582,15 @@ export namespace Prisma {
     readonly userId: FieldRef<"Profile", 'String'>
     readonly unProvedSkills: FieldRef<"Profile", 'Skills[]'>
     readonly provedSkills: FieldRef<"Profile", 'Skills[]'>
-    readonly achievements: FieldRef<"Profile", 'Achievements[]'>
-    readonly education: FieldRef<"Profile", 'String'>
-    readonly codeLanguages: FieldRef<"Profile", 'codeLanguages[]'>
+    readonly education: FieldRef<"Profile", 'String[]'>
+    readonly name: FieldRef<"Profile", 'String'>
+    readonly surname: FieldRef<"Profile", 'String'>
+    readonly age: FieldRef<"Profile", 'Int'>
+    readonly positions: FieldRef<"Profile", 'String[]'>
+    readonly workExp: FieldRef<"Profile", 'Int'>
+    readonly workPlaces: FieldRef<"Profile", 'String[]'>
+    readonly filledProfile: FieldRef<"Profile", 'Boolean'>
+    readonly otherLinks: FieldRef<"Profile", 'String[]'>
   }
     
 
@@ -2888,9 +2949,15 @@ export namespace Prisma {
     userId: 'userId',
     unProvedSkills: 'unProvedSkills',
     provedSkills: 'provedSkills',
-    achievements: 'achievements',
     education: 'education',
-    codeLanguages: 'codeLanguages'
+    name: 'name',
+    surname: 'surname',
+    age: 'age',
+    positions: 'positions',
+    workExp: 'workExp',
+    workPlaces: 'workPlaces',
+    filledProfile: 'filledProfile',
+    otherLinks: 'otherLinks'
   };
 
   export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
@@ -2954,34 +3021,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Achievements[]'
-   */
-  export type ListEnumAchievementsFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Achievements[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Achievements'
-   */
-  export type EnumAchievementsFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Achievements'>
-    
-
-
-  /**
-   * Reference to a field of type 'codeLanguages[]'
-   */
-  export type ListEnumcodeLanguagesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'codeLanguages[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'codeLanguages'
-   */
-  export type EnumcodeLanguagesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'codeLanguages'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -2992,6 +3031,27 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -3070,9 +3130,15 @@ export namespace Prisma {
     userId?: UuidFilter<"Profile"> | string
     unProvedSkills?: EnumSkillsNullableListFilter<"Profile">
     provedSkills?: EnumSkillsNullableListFilter<"Profile">
-    achievements?: EnumAchievementsNullableListFilter<"Profile">
-    education?: StringFilter<"Profile"> | string
-    codeLanguages?: EnumcodeLanguagesNullableListFilter<"Profile">
+    education?: StringNullableListFilter<"Profile">
+    name?: StringNullableFilter<"Profile"> | string | null
+    surname?: StringNullableFilter<"Profile"> | string | null
+    age?: IntNullableFilter<"Profile"> | number | null
+    positions?: StringNullableListFilter<"Profile">
+    workExp?: IntNullableFilter<"Profile"> | number | null
+    workPlaces?: StringNullableListFilter<"Profile">
+    filledProfile?: BoolFilter<"Profile"> | boolean
+    otherLinks?: StringNullableListFilter<"Profile">
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
@@ -3080,9 +3146,15 @@ export namespace Prisma {
     userId?: SortOrder
     unProvedSkills?: SortOrder
     provedSkills?: SortOrder
-    achievements?: SortOrder
     education?: SortOrder
-    codeLanguages?: SortOrder
+    name?: SortOrderInput | SortOrder
+    surname?: SortOrderInput | SortOrder
+    age?: SortOrderInput | SortOrder
+    positions?: SortOrder
+    workExp?: SortOrderInput | SortOrder
+    workPlaces?: SortOrder
+    filledProfile?: SortOrder
+    otherLinks?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -3093,9 +3165,15 @@ export namespace Prisma {
     NOT?: ProfileWhereInput | ProfileWhereInput[]
     unProvedSkills?: EnumSkillsNullableListFilter<"Profile">
     provedSkills?: EnumSkillsNullableListFilter<"Profile">
-    achievements?: EnumAchievementsNullableListFilter<"Profile">
-    education?: StringFilter<"Profile"> | string
-    codeLanguages?: EnumcodeLanguagesNullableListFilter<"Profile">
+    education?: StringNullableListFilter<"Profile">
+    name?: StringNullableFilter<"Profile"> | string | null
+    surname?: StringNullableFilter<"Profile"> | string | null
+    age?: IntNullableFilter<"Profile"> | number | null
+    positions?: StringNullableListFilter<"Profile">
+    workExp?: IntNullableFilter<"Profile"> | number | null
+    workPlaces?: StringNullableListFilter<"Profile">
+    filledProfile?: BoolFilter<"Profile"> | boolean
+    otherLinks?: StringNullableListFilter<"Profile">
     user?: XOR<UserRelationFilter, UserWhereInput>
   }, "userId">
 
@@ -3103,12 +3181,20 @@ export namespace Prisma {
     userId?: SortOrder
     unProvedSkills?: SortOrder
     provedSkills?: SortOrder
-    achievements?: SortOrder
     education?: SortOrder
-    codeLanguages?: SortOrder
+    name?: SortOrderInput | SortOrder
+    surname?: SortOrderInput | SortOrder
+    age?: SortOrderInput | SortOrder
+    positions?: SortOrder
+    workExp?: SortOrderInput | SortOrder
+    workPlaces?: SortOrder
+    filledProfile?: SortOrder
+    otherLinks?: SortOrder
     _count?: ProfileCountOrderByAggregateInput
+    _avg?: ProfileAvgOrderByAggregateInput
     _max?: ProfileMaxOrderByAggregateInput
     _min?: ProfileMinOrderByAggregateInput
+    _sum?: ProfileSumOrderByAggregateInput
   }
 
   export type ProfileScalarWhereWithAggregatesInput = {
@@ -3118,9 +3204,15 @@ export namespace Prisma {
     userId?: UuidWithAggregatesFilter<"Profile"> | string
     unProvedSkills?: EnumSkillsNullableListFilter<"Profile">
     provedSkills?: EnumSkillsNullableListFilter<"Profile">
-    achievements?: EnumAchievementsNullableListFilter<"Profile">
-    education?: StringWithAggregatesFilter<"Profile"> | string
-    codeLanguages?: EnumcodeLanguagesNullableListFilter<"Profile">
+    education?: StringNullableListFilter<"Profile">
+    name?: StringNullableWithAggregatesFilter<"Profile"> | string | null
+    surname?: StringNullableWithAggregatesFilter<"Profile"> | string | null
+    age?: IntNullableWithAggregatesFilter<"Profile"> | number | null
+    positions?: StringNullableListFilter<"Profile">
+    workExp?: IntNullableWithAggregatesFilter<"Profile"> | number | null
+    workPlaces?: StringNullableListFilter<"Profile">
+    filledProfile?: BoolWithAggregatesFilter<"Profile"> | boolean
+    otherLinks?: StringNullableListFilter<"Profile">
   }
 
   export type UserCreateInput = {
@@ -3200,9 +3292,15 @@ export namespace Prisma {
   export type ProfileCreateInput = {
     unProvedSkills?: ProfileCreateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: ProfileCreateprovedSkillsInput | $Enums.Skills[]
-    achievements?: ProfileCreateachievementsInput | $Enums.Achievements[]
-    education: string
-    codeLanguages?: ProfileCreatecodeLanguagesInput | $Enums.codeLanguages[]
+    education?: ProfileCreateeducationInput | string[]
+    name?: string | null
+    surname?: string | null
+    age?: number | null
+    positions?: ProfileCreatepositionsInput | string[]
+    workExp?: number | null
+    workPlaces?: ProfileCreateworkPlacesInput | string[]
+    filledProfile?: boolean
+    otherLinks?: ProfileCreateotherLinksInput | string[]
     user: UserCreateNestedOneWithoutProfileInput
   }
 
@@ -3210,17 +3308,29 @@ export namespace Prisma {
     userId: string
     unProvedSkills?: ProfileCreateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: ProfileCreateprovedSkillsInput | $Enums.Skills[]
-    achievements?: ProfileCreateachievementsInput | $Enums.Achievements[]
-    education: string
-    codeLanguages?: ProfileCreatecodeLanguagesInput | $Enums.codeLanguages[]
+    education?: ProfileCreateeducationInput | string[]
+    name?: string | null
+    surname?: string | null
+    age?: number | null
+    positions?: ProfileCreatepositionsInput | string[]
+    workExp?: number | null
+    workPlaces?: ProfileCreateworkPlacesInput | string[]
+    filledProfile?: boolean
+    otherLinks?: ProfileCreateotherLinksInput | string[]
   }
 
   export type ProfileUpdateInput = {
     unProvedSkills?: ProfileUpdateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: ProfileUpdateprovedSkillsInput | $Enums.Skills[]
-    achievements?: ProfileUpdateachievementsInput | $Enums.Achievements[]
-    education?: StringFieldUpdateOperationsInput | string
-    codeLanguages?: ProfileUpdatecodeLanguagesInput | $Enums.codeLanguages[]
+    education?: ProfileUpdateeducationInput | string[]
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    positions?: ProfileUpdatepositionsInput | string[]
+    workExp?: NullableIntFieldUpdateOperationsInput | number | null
+    workPlaces?: ProfileUpdateworkPlacesInput | string[]
+    filledProfile?: BoolFieldUpdateOperationsInput | boolean
+    otherLinks?: ProfileUpdateotherLinksInput | string[]
     user?: UserUpdateOneRequiredWithoutProfileNestedInput
   }
 
@@ -3228,35 +3338,59 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     unProvedSkills?: ProfileUpdateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: ProfileUpdateprovedSkillsInput | $Enums.Skills[]
-    achievements?: ProfileUpdateachievementsInput | $Enums.Achievements[]
-    education?: StringFieldUpdateOperationsInput | string
-    codeLanguages?: ProfileUpdatecodeLanguagesInput | $Enums.codeLanguages[]
+    education?: ProfileUpdateeducationInput | string[]
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    positions?: ProfileUpdatepositionsInput | string[]
+    workExp?: NullableIntFieldUpdateOperationsInput | number | null
+    workPlaces?: ProfileUpdateworkPlacesInput | string[]
+    filledProfile?: BoolFieldUpdateOperationsInput | boolean
+    otherLinks?: ProfileUpdateotherLinksInput | string[]
   }
 
   export type ProfileCreateManyInput = {
     userId: string
     unProvedSkills?: ProfileCreateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: ProfileCreateprovedSkillsInput | $Enums.Skills[]
-    achievements?: ProfileCreateachievementsInput | $Enums.Achievements[]
-    education: string
-    codeLanguages?: ProfileCreatecodeLanguagesInput | $Enums.codeLanguages[]
+    education?: ProfileCreateeducationInput | string[]
+    name?: string | null
+    surname?: string | null
+    age?: number | null
+    positions?: ProfileCreatepositionsInput | string[]
+    workExp?: number | null
+    workPlaces?: ProfileCreateworkPlacesInput | string[]
+    filledProfile?: boolean
+    otherLinks?: ProfileCreateotherLinksInput | string[]
   }
 
   export type ProfileUpdateManyMutationInput = {
     unProvedSkills?: ProfileUpdateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: ProfileUpdateprovedSkillsInput | $Enums.Skills[]
-    achievements?: ProfileUpdateachievementsInput | $Enums.Achievements[]
-    education?: StringFieldUpdateOperationsInput | string
-    codeLanguages?: ProfileUpdatecodeLanguagesInput | $Enums.codeLanguages[]
+    education?: ProfileUpdateeducationInput | string[]
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    positions?: ProfileUpdatepositionsInput | string[]
+    workExp?: NullableIntFieldUpdateOperationsInput | number | null
+    workPlaces?: ProfileUpdateworkPlacesInput | string[]
+    filledProfile?: BoolFieldUpdateOperationsInput | boolean
+    otherLinks?: ProfileUpdateotherLinksInput | string[]
   }
 
   export type ProfileUncheckedUpdateManyInput = {
     userId?: StringFieldUpdateOperationsInput | string
     unProvedSkills?: ProfileUpdateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: ProfileUpdateprovedSkillsInput | $Enums.Skills[]
-    achievements?: ProfileUpdateachievementsInput | $Enums.Achievements[]
-    education?: StringFieldUpdateOperationsInput | string
-    codeLanguages?: ProfileUpdatecodeLanguagesInput | $Enums.codeLanguages[]
+    education?: ProfileUpdateeducationInput | string[]
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    positions?: ProfileUpdatepositionsInput | string[]
+    workExp?: NullableIntFieldUpdateOperationsInput | number | null
+    workPlaces?: ProfileUpdateworkPlacesInput | string[]
+    filledProfile?: BoolFieldUpdateOperationsInput | boolean
+    otherLinks?: ProfileUpdateotherLinksInput | string[]
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -3404,20 +3538,20 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
-  export type EnumAchievementsNullableListFilter<$PrismaModel = never> = {
-    equals?: $Enums.Achievements[] | ListEnumAchievementsFieldRefInput<$PrismaModel> | null
-    has?: $Enums.Achievements | EnumAchievementsFieldRefInput<$PrismaModel> | null
-    hasEvery?: $Enums.Achievements[] | ListEnumAchievementsFieldRefInput<$PrismaModel>
-    hasSome?: $Enums.Achievements[] | ListEnumAchievementsFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type EnumcodeLanguagesNullableListFilter<$PrismaModel = never> = {
-    equals?: $Enums.codeLanguages[] | ListEnumcodeLanguagesFieldRefInput<$PrismaModel> | null
-    has?: $Enums.codeLanguages | EnumcodeLanguagesFieldRefInput<$PrismaModel> | null
-    hasEvery?: $Enums.codeLanguages[] | ListEnumcodeLanguagesFieldRefInput<$PrismaModel>
-    hasSome?: $Enums.codeLanguages[] | ListEnumcodeLanguagesFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type UserRelationFilter = {
@@ -3429,19 +3563,67 @@ export namespace Prisma {
     userId?: SortOrder
     unProvedSkills?: SortOrder
     provedSkills?: SortOrder
-    achievements?: SortOrder
     education?: SortOrder
-    codeLanguages?: SortOrder
+    name?: SortOrder
+    surname?: SortOrder
+    age?: SortOrder
+    positions?: SortOrder
+    workExp?: SortOrder
+    workPlaces?: SortOrder
+    filledProfile?: SortOrder
+    otherLinks?: SortOrder
+  }
+
+  export type ProfileAvgOrderByAggregateInput = {
+    age?: SortOrder
+    workExp?: SortOrder
   }
 
   export type ProfileMaxOrderByAggregateInput = {
     userId?: SortOrder
-    education?: SortOrder
+    name?: SortOrder
+    surname?: SortOrder
+    age?: SortOrder
+    workExp?: SortOrder
+    filledProfile?: SortOrder
   }
 
   export type ProfileMinOrderByAggregateInput = {
     userId?: SortOrder
-    education?: SortOrder
+    name?: SortOrder
+    surname?: SortOrder
+    age?: SortOrder
+    workExp?: SortOrder
+    filledProfile?: SortOrder
+  }
+
+  export type ProfileSumOrderByAggregateInput = {
+    age?: SortOrder
+    workExp?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type UserCreatelikedPostsInput = {
@@ -3510,12 +3692,20 @@ export namespace Prisma {
     set: $Enums.Skills[]
   }
 
-  export type ProfileCreateachievementsInput = {
-    set: $Enums.Achievements[]
+  export type ProfileCreateeducationInput = {
+    set: string[]
   }
 
-  export type ProfileCreatecodeLanguagesInput = {
-    set: $Enums.codeLanguages[]
+  export type ProfileCreatepositionsInput = {
+    set: string[]
+  }
+
+  export type ProfileCreateworkPlacesInput = {
+    set: string[]
+  }
+
+  export type ProfileCreateotherLinksInput = {
+    set: string[]
   }
 
   export type UserCreateNestedOneWithoutProfileInput = {
@@ -3534,14 +3724,36 @@ export namespace Prisma {
     push?: $Enums.Skills | $Enums.Skills[]
   }
 
-  export type ProfileUpdateachievementsInput = {
-    set?: $Enums.Achievements[]
-    push?: $Enums.Achievements | $Enums.Achievements[]
+  export type ProfileUpdateeducationInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
-  export type ProfileUpdatecodeLanguagesInput = {
-    set?: $Enums.codeLanguages[]
-    push?: $Enums.codeLanguages | $Enums.codeLanguages[]
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type ProfileUpdatepositionsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ProfileUpdateworkPlacesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type ProfileUpdateotherLinksInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type UserUpdateOneRequiredWithoutProfileNestedInput = {
@@ -3661,20 +3873,72 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type ProfileCreateWithoutUserInput = {
     unProvedSkills?: ProfileCreateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: ProfileCreateprovedSkillsInput | $Enums.Skills[]
-    achievements?: ProfileCreateachievementsInput | $Enums.Achievements[]
-    education: string
-    codeLanguages?: ProfileCreatecodeLanguagesInput | $Enums.codeLanguages[]
+    education?: ProfileCreateeducationInput | string[]
+    name?: string | null
+    surname?: string | null
+    age?: number | null
+    positions?: ProfileCreatepositionsInput | string[]
+    workExp?: number | null
+    workPlaces?: ProfileCreateworkPlacesInput | string[]
+    filledProfile?: boolean
+    otherLinks?: ProfileCreateotherLinksInput | string[]
   }
 
   export type ProfileUncheckedCreateWithoutUserInput = {
     unProvedSkills?: ProfileCreateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: ProfileCreateprovedSkillsInput | $Enums.Skills[]
-    achievements?: ProfileCreateachievementsInput | $Enums.Achievements[]
-    education: string
-    codeLanguages?: ProfileCreatecodeLanguagesInput | $Enums.codeLanguages[]
+    education?: ProfileCreateeducationInput | string[]
+    name?: string | null
+    surname?: string | null
+    age?: number | null
+    positions?: ProfileCreatepositionsInput | string[]
+    workExp?: number | null
+    workPlaces?: ProfileCreateworkPlacesInput | string[]
+    filledProfile?: boolean
+    otherLinks?: ProfileCreateotherLinksInput | string[]
   }
 
   export type ProfileCreateOrConnectWithoutUserInput = {
@@ -3696,17 +3960,29 @@ export namespace Prisma {
   export type ProfileUpdateWithoutUserInput = {
     unProvedSkills?: ProfileUpdateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: ProfileUpdateprovedSkillsInput | $Enums.Skills[]
-    achievements?: ProfileUpdateachievementsInput | $Enums.Achievements[]
-    education?: StringFieldUpdateOperationsInput | string
-    codeLanguages?: ProfileUpdatecodeLanguagesInput | $Enums.codeLanguages[]
+    education?: ProfileUpdateeducationInput | string[]
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    positions?: ProfileUpdatepositionsInput | string[]
+    workExp?: NullableIntFieldUpdateOperationsInput | number | null
+    workPlaces?: ProfileUpdateworkPlacesInput | string[]
+    filledProfile?: BoolFieldUpdateOperationsInput | boolean
+    otherLinks?: ProfileUpdateotherLinksInput | string[]
   }
 
   export type ProfileUncheckedUpdateWithoutUserInput = {
     unProvedSkills?: ProfileUpdateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: ProfileUpdateprovedSkillsInput | $Enums.Skills[]
-    achievements?: ProfileUpdateachievementsInput | $Enums.Achievements[]
-    education?: StringFieldUpdateOperationsInput | string
-    codeLanguages?: ProfileUpdatecodeLanguagesInput | $Enums.codeLanguages[]
+    education?: ProfileUpdateeducationInput | string[]
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    positions?: ProfileUpdatepositionsInput | string[]
+    workExp?: NullableIntFieldUpdateOperationsInput | number | null
+    workPlaces?: ProfileUpdateworkPlacesInput | string[]
+    filledProfile?: BoolFieldUpdateOperationsInput | boolean
+    otherLinks?: ProfileUpdateotherLinksInput | string[]
   }
 
   export type UserCreateWithoutProfileInput = {

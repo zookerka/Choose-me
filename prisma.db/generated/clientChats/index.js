@@ -142,6 +142,10 @@ const config = {
       {
         "fromEnvVar": null,
         "value": "debian-openssl-3.0.x"
+      },
+      {
+        "fromEnvVar": null,
+        "value": "linux-musl-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -167,8 +171,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyID0gInByaXNtYS1jbGllbnQtanMiDQogIG91dHB1dCA9ICIuL2dlbmVyYXRlZC9jbGllbnRDaGF0cyINCiAgYmluYXJ5VGFyZ2V0cyA9IFsibmF0aXZlIiwgImRlYmlhbi1vcGVuc3NsLTMuMC54Il0NCn0NCg0KDQpkYXRhc291cmNlIGNoYXRzIHsNCiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCINCiAgdXJsICAgICAgPSBlbnYoIkNIQVRTX0RCX1VSTCIpDQogIGRpcmVjdFVybCA9IGVudigiQ0hBVFNfRElSRUNUX1VSTCIpDQp9DQoNCg0KbW9kZWwgUm9vbSB7DQogIGlkICAgICAgICBTdHJpbmcgICAgICBAaWQgQGRlZmF1bHQoY3VpZCgpKQ0KICB1c2VycyAgICAgU3RyaW5nW10gICAgICANCiAgbWVzc2FnZXMgIE1lc3NhZ2VbXQ0KfQ0KDQptb2RlbCBNZXNzYWdlIHsNCiAgaWQgICAgICAgIFN0cmluZyAgICAgIEBpZCBAZGVmYXVsdChjdWlkKCkpDQogIG1lc3NhZ2UgICBTdHJpbmcNCiAgZnJvbV9pZCAgIFN0cmluZw0KICB0b19pZCAgICAgU3RyaW5nDQogIHJvb20gICAgICBSb29tICAgICAgICBAcmVsYXRpb24oZmllbGRzOiBbcm9vbUlkXSwgcmVmZXJlbmNlczogW2lkXSkNCiAgcm9vbUlkICAgIFN0cmluZw0KICBpbWFnZSAgICAgQm9vbGVhbiAgICAgQGRlZmF1bHQoZmFsc2UpDQp9",
-  "inlineSchemaHash": "85a504c24d1f31b9584be1f3b28d4f30d872758dcd562427ab25c56318e1afa9",
+  "inlineSchema": "Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyID0gInByaXNtYS1jbGllbnQtanMiDQogIG91dHB1dCA9ICIuL2dlbmVyYXRlZC9jbGllbnRDaGF0cyINCiAgYmluYXJ5VGFyZ2V0cyA9IFsibmF0aXZlIiwgImRlYmlhbi1vcGVuc3NsLTMuMC54IiwgImxpbnV4LW11c2wtb3BlbnNzbC0zLjAueCJdDQp9DQoNCg0KZGF0YXNvdXJjZSBjaGF0cyB7DQogIHByb3ZpZGVyID0gInBvc3RncmVzcWwiDQogIHVybCAgICAgID0gZW52KCJDSEFUU19EQl9VUkwiKQ0KICBkaXJlY3RVcmwgPSBlbnYoIkNIQVRTX0RJUkVDVF9VUkwiKQ0KfQ0KDQoNCm1vZGVsIFJvb20gew0KICBpZCAgICAgICAgU3RyaW5nICAgICAgQGlkIEBkZWZhdWx0KGN1aWQoKSkNCiAgdXNlcnMgICAgIFN0cmluZ1tdICAgICAgDQogIG1lc3NhZ2VzICBNZXNzYWdlW10NCn0NCg0KbW9kZWwgTWVzc2FnZSB7DQogIGlkICAgICAgICBTdHJpbmcgICAgICBAaWQgQGRlZmF1bHQoY3VpZCgpKQ0KICBtZXNzYWdlICAgU3RyaW5nDQogIGZyb21faWQgICBTdHJpbmcNCiAgdG9faWQgICAgIFN0cmluZw0KICByb29tICAgICAgUm9vbSAgICAgICAgQHJlbGF0aW9uKGZpZWxkczogW3Jvb21JZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIHJvb21JZCAgICBTdHJpbmcNCiAgaW1hZ2UgICAgIEJvb2xlYW4gICAgIEBkZWZhdWx0KGZhbHNlKQ0KfQ==",
+  "inlineSchemaHash": "edd1fc9c8fd95d36c5a1e748c1ea43e55b946f0d0c0c877e4253e021ef83daab",
   "noEngine": false
 }
 
@@ -212,6 +216,10 @@ path.join(process.cwd(), "prisma.db/generated/clientChats/query_engine-windows.d
 // file annotations for bundling tools to include these files
 path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
 path.join(process.cwd(), "prisma.db/generated/clientChats/libquery_engine-debian-openssl-3.0.x.so.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-linux-musl-openssl-3.0.x.so.node");
+path.join(process.cwd(), "prisma.db/generated/clientChats/libquery_engine-linux-musl-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "prisma.db/generated/clientChats/schema.prisma")

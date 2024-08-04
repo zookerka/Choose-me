@@ -44,6 +44,42 @@
       "compilerOptions": {
         "tsConfigPath": "apps/devs/create-card/tsconfig.app.json"
       }
+    },
+    "devs/update-card": {
+      "type": "application",
+      "root": "apps/devs/update-card",
+      "entryFile": "main",
+      "sourceRoot": "apps/devs/update-card/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/devs/update-card/tsconfig.app.json"
+      }
+    },
+    "devs/disable-card": {
+      "type": "application",
+      "root": "apps/devs/disable-card",
+      "entryFile": "main",
+      "sourceRoot": "apps/devs/disable-card/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/devs/disable-card/tsconfig.app.json"
+      }
+    },
+    "devs/enable-card": {
+      "type": "application",
+      "root": "apps/devs/enable-card",
+      "entryFile": "main",
+      "sourceRoot": "apps/devs/enable-card/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/devs/enable-card/tsconfig.app.json"
+      }
+    },
+    "fill-profile": {
+      "type": "application",
+      "root": "apps/fill-profile",
+      "entryFile": "main",
+      "sourceRoot": "apps/fill-profile/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/fill-profile/tsconfig.app.json"
+      }
     }
   }
 }

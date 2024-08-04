@@ -18,11 +18,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type dev = $Result.DefaultSelection<Prisma.$devPayload>
-/**
- * Model devsIdCollection
- * 
- */
-export type devsIdCollection = $Result.DefaultSelection<Prisma.$devsIdCollectionPayload>
 
 /**
  * Enums
@@ -41,28 +36,11 @@ export namespace $Enums {
 
 export type Skills = (typeof Skills)[keyof typeof Skills]
 
-
-export const Achievements: {
-  noAchievements: 'noAchievements',
-  apple: 'apple',
-  microsoft: 'microsoft',
-  senior: 'senior',
-  middle: 'middle',
-  teamlead: 'teamlead',
-  amazon: 'amazon'
-};
-
-export type Achievements = (typeof Achievements)[keyof typeof Achievements]
-
 }
 
 export type Skills = $Enums.Skills
 
 export const Skills: typeof $Enums.Skills
-
-export type Achievements = $Enums.Achievements
-
-export const Achievements: typeof $Enums.Achievements
 
 /**
  * ##  Prisma Client ʲˢ
@@ -195,16 +173,6 @@ export class PrismaClient<
     * ```
     */
   get dev(): Prisma.devDelegate<ExtArgs>;
-
-  /**
-   * `prisma.devsIdCollection`: Exposes CRUD operations for the **devsIdCollection** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more DevsIdCollections
-    * const devsIdCollections = await prisma.devsIdCollection.findMany()
-    * ```
-    */
-  get devsIdCollection(): Prisma.devsIdCollectionDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -675,8 +643,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    dev: 'dev',
-    devsIdCollection: 'devsIdCollection'
+    dev: 'dev'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -693,7 +660,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'dev' | 'devsIdCollection'
+      modelProps: 'dev'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -760,72 +727,6 @@ export namespace Prisma {
           count: {
             args: Prisma.devCountArgs<ExtArgs>,
             result: $Utils.Optional<DevCountAggregateOutputType> | number
-          }
-        }
-      }
-      devsIdCollection: {
-        payload: Prisma.$devsIdCollectionPayload<ExtArgs>
-        fields: Prisma.devsIdCollectionFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.devsIdCollectionFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$devsIdCollectionPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.devsIdCollectionFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$devsIdCollectionPayload>
-          }
-          findFirst: {
-            args: Prisma.devsIdCollectionFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$devsIdCollectionPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.devsIdCollectionFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$devsIdCollectionPayload>
-          }
-          findMany: {
-            args: Prisma.devsIdCollectionFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$devsIdCollectionPayload>[]
-          }
-          create: {
-            args: Prisma.devsIdCollectionCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$devsIdCollectionPayload>
-          }
-          createMany: {
-            args: Prisma.devsIdCollectionCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.devsIdCollectionDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$devsIdCollectionPayload>
-          }
-          update: {
-            args: Prisma.devsIdCollectionUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$devsIdCollectionPayload>
-          }
-          deleteMany: {
-            args: Prisma.devsIdCollectionDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.devsIdCollectionUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.devsIdCollectionUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$devsIdCollectionPayload>
-          }
-          aggregate: {
-            args: Prisma.DevsIdCollectionAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateDevsIdCollection>
-          }
-          groupBy: {
-            args: Prisma.devsIdCollectionGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<DevsIdCollectionGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.devsIdCollectionCountArgs<ExtArgs>,
-            result: $Utils.Optional<DevsIdCollectionCountAggregateOutputType> | number
           }
         }
       }
@@ -984,64 +885,94 @@ export namespace Prisma {
 
   export type AggregateDev = {
     _count: DevCountAggregateOutputType | null
+    _avg: DevAvgAggregateOutputType | null
+    _sum: DevSumAggregateOutputType | null
     _min: DevMinAggregateOutputType | null
     _max: DevMaxAggregateOutputType | null
   }
 
+  export type DevAvgAggregateOutputType = {
+    workExp: number | null
+  }
+
+  export type DevSumAggregateOutputType = {
+    workExp: number | null
+  }
+
   export type DevMinAggregateOutputType = {
     id: string | null
-    authorId: string | null
+    userId: string | null
     name: string | null
     body: string | null
     enabled: boolean | null
+    workExp: number | null
   }
 
   export type DevMaxAggregateOutputType = {
     id: string | null
-    authorId: string | null
+    userId: string | null
     name: string | null
     body: string | null
     enabled: boolean | null
+    workExp: number | null
   }
 
   export type DevCountAggregateOutputType = {
     id: number
-    authorId: number
+    userId: number
     name: number
     body: number
+    enabled: number
     unProvedSkills: number
     provedSkills: number
-    achievements: number
-    enabled: number
+    education: number
+    positions: number
+    workExp: number
+    workPlaces: number
+    otherLinks: number
     _all: number
   }
 
 
+  export type DevAvgAggregateInputType = {
+    workExp?: true
+  }
+
+  export type DevSumAggregateInputType = {
+    workExp?: true
+  }
+
   export type DevMinAggregateInputType = {
     id?: true
-    authorId?: true
+    userId?: true
     name?: true
     body?: true
     enabled?: true
+    workExp?: true
   }
 
   export type DevMaxAggregateInputType = {
     id?: true
-    authorId?: true
+    userId?: true
     name?: true
     body?: true
     enabled?: true
+    workExp?: true
   }
 
   export type DevCountAggregateInputType = {
     id?: true
-    authorId?: true
+    userId?: true
     name?: true
     body?: true
+    enabled?: true
     unProvedSkills?: true
     provedSkills?: true
-    achievements?: true
-    enabled?: true
+    education?: true
+    positions?: true
+    workExp?: true
+    workPlaces?: true
+    otherLinks?: true
     _all?: true
   }
 
@@ -1083,6 +1014,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: DevAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DevSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: DevMinAggregateInputType
@@ -1113,20 +1056,28 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: DevCountAggregateInputType | true
+    _avg?: DevAvgAggregateInputType
+    _sum?: DevSumAggregateInputType
     _min?: DevMinAggregateInputType
     _max?: DevMaxAggregateInputType
   }
 
   export type DevGroupByOutputType = {
     id: string
-    authorId: string
+    userId: string
     name: string
     body: string
+    enabled: boolean
     unProvedSkills: $Enums.Skills[]
     provedSkills: $Enums.Skills[]
-    achievements: $Enums.Achievements[]
-    enabled: boolean
+    education: string[]
+    positions: string[]
+    workExp: number | null
+    workPlaces: string[]
+    otherLinks: string[]
     _count: DevCountAggregateOutputType | null
+    _avg: DevAvgAggregateOutputType | null
+    _sum: DevSumAggregateOutputType | null
     _min: DevMinAggregateOutputType | null
     _max: DevMaxAggregateOutputType | null
   }
@@ -1147,24 +1098,32 @@ export namespace Prisma {
 
   export type devSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    authorId?: boolean
+    userId?: boolean
     name?: boolean
     body?: boolean
+    enabled?: boolean
     unProvedSkills?: boolean
     provedSkills?: boolean
-    achievements?: boolean
-    enabled?: boolean
+    education?: boolean
+    positions?: boolean
+    workExp?: boolean
+    workPlaces?: boolean
+    otherLinks?: boolean
   }, ExtArgs["result"]["dev"]>
 
   export type devSelectScalar = {
     id?: boolean
-    authorId?: boolean
+    userId?: boolean
     name?: boolean
     body?: boolean
+    enabled?: boolean
     unProvedSkills?: boolean
     provedSkills?: boolean
-    achievements?: boolean
-    enabled?: boolean
+    education?: boolean
+    positions?: boolean
+    workExp?: boolean
+    workPlaces?: boolean
+    otherLinks?: boolean
   }
 
 
@@ -1173,13 +1132,17 @@ export namespace Prisma {
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      authorId: string
+      userId: string
       name: string
       body: string
+      enabled: boolean
       unProvedSkills: $Enums.Skills[]
       provedSkills: $Enums.Skills[]
-      achievements: $Enums.Achievements[]
-      enabled: boolean
+      education: string[]
+      positions: string[]
+      workExp: number | null
+      workPlaces: string[]
+      otherLinks: string[]
     }, ExtArgs["result"]["dev"]>
     composites: {}
   }
@@ -1575,13 +1538,17 @@ export namespace Prisma {
    */ 
   interface devFieldRefs {
     readonly id: FieldRef<"dev", 'String'>
-    readonly authorId: FieldRef<"dev", 'String'>
+    readonly userId: FieldRef<"dev", 'String'>
     readonly name: FieldRef<"dev", 'String'>
     readonly body: FieldRef<"dev", 'String'>
+    readonly enabled: FieldRef<"dev", 'Boolean'>
     readonly unProvedSkills: FieldRef<"dev", 'Skills[]'>
     readonly provedSkills: FieldRef<"dev", 'Skills[]'>
-    readonly achievements: FieldRef<"dev", 'Achievements[]'>
-    readonly enabled: FieldRef<"dev", 'Boolean'>
+    readonly education: FieldRef<"dev", 'String[]'>
+    readonly positions: FieldRef<"dev", 'String[]'>
+    readonly workExp: FieldRef<"dev", 'Int'>
+    readonly workPlaces: FieldRef<"dev", 'String[]'>
+    readonly otherLinks: FieldRef<"dev", 'String[]'>
   }
     
 
@@ -1870,832 +1837,6 @@ export namespace Prisma {
 
 
   /**
-   * Model devsIdCollection
-   */
-
-  export type AggregateDevsIdCollection = {
-    _count: DevsIdCollectionCountAggregateOutputType | null
-    _min: DevsIdCollectionMinAggregateOutputType | null
-    _max: DevsIdCollectionMaxAggregateOutputType | null
-  }
-
-  export type DevsIdCollectionMinAggregateOutputType = {
-    devId: string | null
-  }
-
-  export type DevsIdCollectionMaxAggregateOutputType = {
-    devId: string | null
-  }
-
-  export type DevsIdCollectionCountAggregateOutputType = {
-    devId: number
-    _all: number
-  }
-
-
-  export type DevsIdCollectionMinAggregateInputType = {
-    devId?: true
-  }
-
-  export type DevsIdCollectionMaxAggregateInputType = {
-    devId?: true
-  }
-
-  export type DevsIdCollectionCountAggregateInputType = {
-    devId?: true
-    _all?: true
-  }
-
-  export type DevsIdCollectionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which devsIdCollection to aggregate.
-     */
-    where?: devsIdCollectionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of devsIdCollections to fetch.
-     */
-    orderBy?: devsIdCollectionOrderByWithRelationInput | devsIdCollectionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: devsIdCollectionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` devsIdCollections from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` devsIdCollections.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned devsIdCollections
-    **/
-    _count?: true | DevsIdCollectionCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: DevsIdCollectionMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: DevsIdCollectionMaxAggregateInputType
-  }
-
-  export type GetDevsIdCollectionAggregateType<T extends DevsIdCollectionAggregateArgs> = {
-        [P in keyof T & keyof AggregateDevsIdCollection]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateDevsIdCollection[P]>
-      : GetScalarType<T[P], AggregateDevsIdCollection[P]>
-  }
-
-
-
-
-  export type devsIdCollectionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: devsIdCollectionWhereInput
-    orderBy?: devsIdCollectionOrderByWithAggregationInput | devsIdCollectionOrderByWithAggregationInput[]
-    by: DevsIdCollectionScalarFieldEnum[] | DevsIdCollectionScalarFieldEnum
-    having?: devsIdCollectionScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: DevsIdCollectionCountAggregateInputType | true
-    _min?: DevsIdCollectionMinAggregateInputType
-    _max?: DevsIdCollectionMaxAggregateInputType
-  }
-
-  export type DevsIdCollectionGroupByOutputType = {
-    devId: string
-    _count: DevsIdCollectionCountAggregateOutputType | null
-    _min: DevsIdCollectionMinAggregateOutputType | null
-    _max: DevsIdCollectionMaxAggregateOutputType | null
-  }
-
-  type GetDevsIdCollectionGroupByPayload<T extends devsIdCollectionGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<DevsIdCollectionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof DevsIdCollectionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], DevsIdCollectionGroupByOutputType[P]>
-            : GetScalarType<T[P], DevsIdCollectionGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type devsIdCollectionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    devId?: boolean
-  }, ExtArgs["result"]["devsIdCollection"]>
-
-  export type devsIdCollectionSelectScalar = {
-    devId?: boolean
-  }
-
-
-  export type $devsIdCollectionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "devsIdCollection"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      devId: string
-    }, ExtArgs["result"]["devsIdCollection"]>
-    composites: {}
-  }
-
-
-  type devsIdCollectionGetPayload<S extends boolean | null | undefined | devsIdCollectionDefaultArgs> = $Result.GetResult<Prisma.$devsIdCollectionPayload, S>
-
-  type devsIdCollectionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<devsIdCollectionFindManyArgs, 'select' | 'include' | 'distinct' > & {
-      select?: DevsIdCollectionCountAggregateInputType | true
-    }
-
-  export interface devsIdCollectionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['devsIdCollection'], meta: { name: 'devsIdCollection' } }
-    /**
-     * Find zero or one DevsIdCollection that matches the filter.
-     * @param {devsIdCollectionFindUniqueArgs} args - Arguments to find a DevsIdCollection
-     * @example
-     * // Get one DevsIdCollection
-     * const devsIdCollection = await prisma.devsIdCollection.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends devsIdCollectionFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, devsIdCollectionFindUniqueArgs<ExtArgs>>
-    ): Prisma__devsIdCollectionClient<$Result.GetResult<Prisma.$devsIdCollectionPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one DevsIdCollection that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
-     * @param {devsIdCollectionFindUniqueOrThrowArgs} args - Arguments to find a DevsIdCollection
-     * @example
-     * // Get one DevsIdCollection
-     * const devsIdCollection = await prisma.devsIdCollection.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends devsIdCollectionFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, devsIdCollectionFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__devsIdCollectionClient<$Result.GetResult<Prisma.$devsIdCollectionPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first DevsIdCollection that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {devsIdCollectionFindFirstArgs} args - Arguments to find a DevsIdCollection
-     * @example
-     * // Get one DevsIdCollection
-     * const devsIdCollection = await prisma.devsIdCollection.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends devsIdCollectionFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, devsIdCollectionFindFirstArgs<ExtArgs>>
-    ): Prisma__devsIdCollectionClient<$Result.GetResult<Prisma.$devsIdCollectionPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first DevsIdCollection that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {devsIdCollectionFindFirstOrThrowArgs} args - Arguments to find a DevsIdCollection
-     * @example
-     * // Get one DevsIdCollection
-     * const devsIdCollection = await prisma.devsIdCollection.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends devsIdCollectionFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, devsIdCollectionFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__devsIdCollectionClient<$Result.GetResult<Prisma.$devsIdCollectionPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more DevsIdCollections that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {devsIdCollectionFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all DevsIdCollections
-     * const devsIdCollections = await prisma.devsIdCollection.findMany()
-     * 
-     * // Get first 10 DevsIdCollections
-     * const devsIdCollections = await prisma.devsIdCollection.findMany({ take: 10 })
-     * 
-     * // Only select the `devId`
-     * const devsIdCollectionWithDevIdOnly = await prisma.devsIdCollection.findMany({ select: { devId: true } })
-     * 
-    **/
-    findMany<T extends devsIdCollectionFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, devsIdCollectionFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$devsIdCollectionPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a DevsIdCollection.
-     * @param {devsIdCollectionCreateArgs} args - Arguments to create a DevsIdCollection.
-     * @example
-     * // Create one DevsIdCollection
-     * const DevsIdCollection = await prisma.devsIdCollection.create({
-     *   data: {
-     *     // ... data to create a DevsIdCollection
-     *   }
-     * })
-     * 
-    **/
-    create<T extends devsIdCollectionCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, devsIdCollectionCreateArgs<ExtArgs>>
-    ): Prisma__devsIdCollectionClient<$Result.GetResult<Prisma.$devsIdCollectionPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many DevsIdCollections.
-     *     @param {devsIdCollectionCreateManyArgs} args - Arguments to create many DevsIdCollections.
-     *     @example
-     *     // Create many DevsIdCollections
-     *     const devsIdCollection = await prisma.devsIdCollection.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *     
-    **/
-    createMany<T extends devsIdCollectionCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, devsIdCollectionCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a DevsIdCollection.
-     * @param {devsIdCollectionDeleteArgs} args - Arguments to delete one DevsIdCollection.
-     * @example
-     * // Delete one DevsIdCollection
-     * const DevsIdCollection = await prisma.devsIdCollection.delete({
-     *   where: {
-     *     // ... filter to delete one DevsIdCollection
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends devsIdCollectionDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, devsIdCollectionDeleteArgs<ExtArgs>>
-    ): Prisma__devsIdCollectionClient<$Result.GetResult<Prisma.$devsIdCollectionPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one DevsIdCollection.
-     * @param {devsIdCollectionUpdateArgs} args - Arguments to update one DevsIdCollection.
-     * @example
-     * // Update one DevsIdCollection
-     * const devsIdCollection = await prisma.devsIdCollection.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends devsIdCollectionUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, devsIdCollectionUpdateArgs<ExtArgs>>
-    ): Prisma__devsIdCollectionClient<$Result.GetResult<Prisma.$devsIdCollectionPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more DevsIdCollections.
-     * @param {devsIdCollectionDeleteManyArgs} args - Arguments to filter DevsIdCollections to delete.
-     * @example
-     * // Delete a few DevsIdCollections
-     * const { count } = await prisma.devsIdCollection.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends devsIdCollectionDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, devsIdCollectionDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more DevsIdCollections.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {devsIdCollectionUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many DevsIdCollections
-     * const devsIdCollection = await prisma.devsIdCollection.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends devsIdCollectionUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, devsIdCollectionUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one DevsIdCollection.
-     * @param {devsIdCollectionUpsertArgs} args - Arguments to update or create a DevsIdCollection.
-     * @example
-     * // Update or create a DevsIdCollection
-     * const devsIdCollection = await prisma.devsIdCollection.upsert({
-     *   create: {
-     *     // ... data to create a DevsIdCollection
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the DevsIdCollection we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends devsIdCollectionUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, devsIdCollectionUpsertArgs<ExtArgs>>
-    ): Prisma__devsIdCollectionClient<$Result.GetResult<Prisma.$devsIdCollectionPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of DevsIdCollections.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {devsIdCollectionCountArgs} args - Arguments to filter DevsIdCollections to count.
-     * @example
-     * // Count the number of DevsIdCollections
-     * const count = await prisma.devsIdCollection.count({
-     *   where: {
-     *     // ... the filter for the DevsIdCollections we want to count
-     *   }
-     * })
-    **/
-    count<T extends devsIdCollectionCountArgs>(
-      args?: Subset<T, devsIdCollectionCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], DevsIdCollectionCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a DevsIdCollection.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DevsIdCollectionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends DevsIdCollectionAggregateArgs>(args: Subset<T, DevsIdCollectionAggregateArgs>): Prisma.PrismaPromise<GetDevsIdCollectionAggregateType<T>>
-
-    /**
-     * Group by DevsIdCollection.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {devsIdCollectionGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends devsIdCollectionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: devsIdCollectionGroupByArgs['orderBy'] }
-        : { orderBy?: devsIdCollectionGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, devsIdCollectionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDevsIdCollectionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the devsIdCollection model
-   */
-  readonly fields: devsIdCollectionFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for devsIdCollection.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__devsIdCollectionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the devsIdCollection model
-   */ 
-  interface devsIdCollectionFieldRefs {
-    readonly devId: FieldRef<"devsIdCollection", 'String'>
-  }
-    
-
-  // Custom InputTypes
-
-  /**
-   * devsIdCollection findUnique
-   */
-  export type devsIdCollectionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the devsIdCollection
-     */
-    select?: devsIdCollectionSelect<ExtArgs> | null
-    /**
-     * Filter, which devsIdCollection to fetch.
-     */
-    where: devsIdCollectionWhereUniqueInput
-  }
-
-
-  /**
-   * devsIdCollection findUniqueOrThrow
-   */
-  export type devsIdCollectionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the devsIdCollection
-     */
-    select?: devsIdCollectionSelect<ExtArgs> | null
-    /**
-     * Filter, which devsIdCollection to fetch.
-     */
-    where: devsIdCollectionWhereUniqueInput
-  }
-
-
-  /**
-   * devsIdCollection findFirst
-   */
-  export type devsIdCollectionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the devsIdCollection
-     */
-    select?: devsIdCollectionSelect<ExtArgs> | null
-    /**
-     * Filter, which devsIdCollection to fetch.
-     */
-    where?: devsIdCollectionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of devsIdCollections to fetch.
-     */
-    orderBy?: devsIdCollectionOrderByWithRelationInput | devsIdCollectionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for devsIdCollections.
-     */
-    cursor?: devsIdCollectionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` devsIdCollections from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` devsIdCollections.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of devsIdCollections.
-     */
-    distinct?: DevsIdCollectionScalarFieldEnum | DevsIdCollectionScalarFieldEnum[]
-  }
-
-
-  /**
-   * devsIdCollection findFirstOrThrow
-   */
-  export type devsIdCollectionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the devsIdCollection
-     */
-    select?: devsIdCollectionSelect<ExtArgs> | null
-    /**
-     * Filter, which devsIdCollection to fetch.
-     */
-    where?: devsIdCollectionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of devsIdCollections to fetch.
-     */
-    orderBy?: devsIdCollectionOrderByWithRelationInput | devsIdCollectionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for devsIdCollections.
-     */
-    cursor?: devsIdCollectionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` devsIdCollections from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` devsIdCollections.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of devsIdCollections.
-     */
-    distinct?: DevsIdCollectionScalarFieldEnum | DevsIdCollectionScalarFieldEnum[]
-  }
-
-
-  /**
-   * devsIdCollection findMany
-   */
-  export type devsIdCollectionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the devsIdCollection
-     */
-    select?: devsIdCollectionSelect<ExtArgs> | null
-    /**
-     * Filter, which devsIdCollections to fetch.
-     */
-    where?: devsIdCollectionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of devsIdCollections to fetch.
-     */
-    orderBy?: devsIdCollectionOrderByWithRelationInput | devsIdCollectionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing devsIdCollections.
-     */
-    cursor?: devsIdCollectionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` devsIdCollections from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` devsIdCollections.
-     */
-    skip?: number
-    distinct?: DevsIdCollectionScalarFieldEnum | DevsIdCollectionScalarFieldEnum[]
-  }
-
-
-  /**
-   * devsIdCollection create
-   */
-  export type devsIdCollectionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the devsIdCollection
-     */
-    select?: devsIdCollectionSelect<ExtArgs> | null
-    /**
-     * The data needed to create a devsIdCollection.
-     */
-    data: XOR<devsIdCollectionCreateInput, devsIdCollectionUncheckedCreateInput>
-  }
-
-
-  /**
-   * devsIdCollection createMany
-   */
-  export type devsIdCollectionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many devsIdCollections.
-     */
-    data: devsIdCollectionCreateManyInput | devsIdCollectionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-
-  /**
-   * devsIdCollection update
-   */
-  export type devsIdCollectionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the devsIdCollection
-     */
-    select?: devsIdCollectionSelect<ExtArgs> | null
-    /**
-     * The data needed to update a devsIdCollection.
-     */
-    data: XOR<devsIdCollectionUpdateInput, devsIdCollectionUncheckedUpdateInput>
-    /**
-     * Choose, which devsIdCollection to update.
-     */
-    where: devsIdCollectionWhereUniqueInput
-  }
-
-
-  /**
-   * devsIdCollection updateMany
-   */
-  export type devsIdCollectionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update devsIdCollections.
-     */
-    data: XOR<devsIdCollectionUpdateManyMutationInput, devsIdCollectionUncheckedUpdateManyInput>
-    /**
-     * Filter which devsIdCollections to update
-     */
-    where?: devsIdCollectionWhereInput
-  }
-
-
-  /**
-   * devsIdCollection upsert
-   */
-  export type devsIdCollectionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the devsIdCollection
-     */
-    select?: devsIdCollectionSelect<ExtArgs> | null
-    /**
-     * The filter to search for the devsIdCollection to update in case it exists.
-     */
-    where: devsIdCollectionWhereUniqueInput
-    /**
-     * In case the devsIdCollection found by the `where` argument doesn't exist, create a new devsIdCollection with this data.
-     */
-    create: XOR<devsIdCollectionCreateInput, devsIdCollectionUncheckedCreateInput>
-    /**
-     * In case the devsIdCollection was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<devsIdCollectionUpdateInput, devsIdCollectionUncheckedUpdateInput>
-  }
-
-
-  /**
-   * devsIdCollection delete
-   */
-  export type devsIdCollectionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the devsIdCollection
-     */
-    select?: devsIdCollectionSelect<ExtArgs> | null
-    /**
-     * Filter which devsIdCollection to delete.
-     */
-    where: devsIdCollectionWhereUniqueInput
-  }
-
-
-  /**
-   * devsIdCollection deleteMany
-   */
-  export type devsIdCollectionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which devsIdCollections to delete
-     */
-    where?: devsIdCollectionWhereInput
-  }
-
-
-  /**
-   * devsIdCollection without action
-   */
-  export type devsIdCollectionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the devsIdCollection
-     */
-    select?: devsIdCollectionSelect<ExtArgs> | null
-  }
-
-
-
-  /**
    * Enums
    */
 
@@ -2711,23 +1852,20 @@ export namespace Prisma {
 
   export const DevScalarFieldEnum: {
     id: 'id',
-    authorId: 'authorId',
+    userId: 'userId',
     name: 'name',
     body: 'body',
+    enabled: 'enabled',
     unProvedSkills: 'unProvedSkills',
     provedSkills: 'provedSkills',
-    achievements: 'achievements',
-    enabled: 'enabled'
+    education: 'education',
+    positions: 'positions',
+    workExp: 'workExp',
+    workPlaces: 'workPlaces',
+    otherLinks: 'otherLinks'
   };
 
   export type DevScalarFieldEnum = (typeof DevScalarFieldEnum)[keyof typeof DevScalarFieldEnum]
-
-
-  export const DevsIdCollectionScalarFieldEnum: {
-    devId: 'devId'
-  };
-
-  export type DevsIdCollectionScalarFieldEnum = (typeof DevsIdCollectionScalarFieldEnum)[keyof typeof DevsIdCollectionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -2744,6 +1882,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -2766,6 +1912,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Skills[]'
    */
   export type ListEnumSkillsFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Skills[]'>
@@ -2776,27 +1929,6 @@ export namespace Prisma {
    * Reference to a field of type 'Skills'
    */
   export type EnumSkillsFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Skills'>
-    
-
-
-  /**
-   * Reference to a field of type 'Achievements[]'
-   */
-  export type ListEnumAchievementsFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Achievements[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Achievements'
-   */
-  export type EnumAchievementsFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Achievements'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -2812,6 +1944,20 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
   /**
    * Deep Input Types
    */
@@ -2822,52 +1968,70 @@ export namespace Prisma {
     OR?: devWhereInput[]
     NOT?: devWhereInput | devWhereInput[]
     id?: UuidFilter<"dev"> | string
-    authorId?: StringFilter<"dev"> | string
+    userId?: StringFilter<"dev"> | string
     name?: StringFilter<"dev"> | string
     body?: StringFilter<"dev"> | string
+    enabled?: BoolFilter<"dev"> | boolean
     unProvedSkills?: EnumSkillsNullableListFilter<"dev">
     provedSkills?: EnumSkillsNullableListFilter<"dev">
-    achievements?: EnumAchievementsNullableListFilter<"dev">
-    enabled?: BoolFilter<"dev"> | boolean
+    education?: StringNullableListFilter<"dev">
+    positions?: StringNullableListFilter<"dev">
+    workExp?: IntNullableFilter<"dev"> | number | null
+    workPlaces?: StringNullableListFilter<"dev">
+    otherLinks?: StringNullableListFilter<"dev">
   }
 
   export type devOrderByWithRelationInput = {
     id?: SortOrder
-    authorId?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     body?: SortOrder
+    enabled?: SortOrder
     unProvedSkills?: SortOrder
     provedSkills?: SortOrder
-    achievements?: SortOrder
-    enabled?: SortOrder
+    education?: SortOrder
+    positions?: SortOrder
+    workExp?: SortOrderInput | SortOrder
+    workPlaces?: SortOrder
+    otherLinks?: SortOrder
   }
 
   export type devWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    authorId?: string
+    userId?: string
     AND?: devWhereInput | devWhereInput[]
     OR?: devWhereInput[]
     NOT?: devWhereInput | devWhereInput[]
     name?: StringFilter<"dev"> | string
     body?: StringFilter<"dev"> | string
+    enabled?: BoolFilter<"dev"> | boolean
     unProvedSkills?: EnumSkillsNullableListFilter<"dev">
     provedSkills?: EnumSkillsNullableListFilter<"dev">
-    achievements?: EnumAchievementsNullableListFilter<"dev">
-    enabled?: BoolFilter<"dev"> | boolean
-  }, "id" | "authorId">
+    education?: StringNullableListFilter<"dev">
+    positions?: StringNullableListFilter<"dev">
+    workExp?: IntNullableFilter<"dev"> | number | null
+    workPlaces?: StringNullableListFilter<"dev">
+    otherLinks?: StringNullableListFilter<"dev">
+  }, "id" | "userId">
 
   export type devOrderByWithAggregationInput = {
     id?: SortOrder
-    authorId?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     body?: SortOrder
+    enabled?: SortOrder
     unProvedSkills?: SortOrder
     provedSkills?: SortOrder
-    achievements?: SortOrder
-    enabled?: SortOrder
+    education?: SortOrder
+    positions?: SortOrder
+    workExp?: SortOrderInput | SortOrder
+    workPlaces?: SortOrder
+    otherLinks?: SortOrder
     _count?: devCountOrderByAggregateInput
+    _avg?: devAvgOrderByAggregateInput
     _max?: devMaxOrderByAggregateInput
     _min?: devMinOrderByAggregateInput
+    _sum?: devSumOrderByAggregateInput
   }
 
   export type devScalarWhereWithAggregatesInput = {
@@ -2875,150 +2039,122 @@ export namespace Prisma {
     OR?: devScalarWhereWithAggregatesInput[]
     NOT?: devScalarWhereWithAggregatesInput | devScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"dev"> | string
-    authorId?: StringWithAggregatesFilter<"dev"> | string
+    userId?: StringWithAggregatesFilter<"dev"> | string
     name?: StringWithAggregatesFilter<"dev"> | string
     body?: StringWithAggregatesFilter<"dev"> | string
+    enabled?: BoolWithAggregatesFilter<"dev"> | boolean
     unProvedSkills?: EnumSkillsNullableListFilter<"dev">
     provedSkills?: EnumSkillsNullableListFilter<"dev">
-    achievements?: EnumAchievementsNullableListFilter<"dev">
-    enabled?: BoolWithAggregatesFilter<"dev"> | boolean
-  }
-
-  export type devsIdCollectionWhereInput = {
-    AND?: devsIdCollectionWhereInput | devsIdCollectionWhereInput[]
-    OR?: devsIdCollectionWhereInput[]
-    NOT?: devsIdCollectionWhereInput | devsIdCollectionWhereInput[]
-    devId?: StringFilter<"devsIdCollection"> | string
-  }
-
-  export type devsIdCollectionOrderByWithRelationInput = {
-    devId?: SortOrder
-  }
-
-  export type devsIdCollectionWhereUniqueInput = Prisma.AtLeast<{
-    devId?: string
-    AND?: devsIdCollectionWhereInput | devsIdCollectionWhereInput[]
-    OR?: devsIdCollectionWhereInput[]
-    NOT?: devsIdCollectionWhereInput | devsIdCollectionWhereInput[]
-  }, "devId">
-
-  export type devsIdCollectionOrderByWithAggregationInput = {
-    devId?: SortOrder
-    _count?: devsIdCollectionCountOrderByAggregateInput
-    _max?: devsIdCollectionMaxOrderByAggregateInput
-    _min?: devsIdCollectionMinOrderByAggregateInput
-  }
-
-  export type devsIdCollectionScalarWhereWithAggregatesInput = {
-    AND?: devsIdCollectionScalarWhereWithAggregatesInput | devsIdCollectionScalarWhereWithAggregatesInput[]
-    OR?: devsIdCollectionScalarWhereWithAggregatesInput[]
-    NOT?: devsIdCollectionScalarWhereWithAggregatesInput | devsIdCollectionScalarWhereWithAggregatesInput[]
-    devId?: StringWithAggregatesFilter<"devsIdCollection"> | string
+    education?: StringNullableListFilter<"dev">
+    positions?: StringNullableListFilter<"dev">
+    workExp?: IntNullableWithAggregatesFilter<"dev"> | number | null
+    workPlaces?: StringNullableListFilter<"dev">
+    otherLinks?: StringNullableListFilter<"dev">
   }
 
   export type devCreateInput = {
     id?: string
-    authorId: string
+    userId: string
     name: string
     body: string
+    enabled?: boolean
     unProvedSkills?: devCreateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: devCreateprovedSkillsInput | $Enums.Skills[]
-    achievements?: devCreateachievementsInput | $Enums.Achievements[]
-    enabled?: boolean
+    education?: devCreateeducationInput | string[]
+    positions?: devCreatepositionsInput | string[]
+    workExp?: number | null
+    workPlaces?: devCreateworkPlacesInput | string[]
+    otherLinks?: devCreateotherLinksInput | string[]
   }
 
   export type devUncheckedCreateInput = {
     id?: string
-    authorId: string
+    userId: string
     name: string
     body: string
+    enabled?: boolean
     unProvedSkills?: devCreateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: devCreateprovedSkillsInput | $Enums.Skills[]
-    achievements?: devCreateachievementsInput | $Enums.Achievements[]
-    enabled?: boolean
+    education?: devCreateeducationInput | string[]
+    positions?: devCreatepositionsInput | string[]
+    workExp?: number | null
+    workPlaces?: devCreateworkPlacesInput | string[]
+    otherLinks?: devCreateotherLinksInput | string[]
   }
 
   export type devUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
     unProvedSkills?: devUpdateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: devUpdateprovedSkillsInput | $Enums.Skills[]
-    achievements?: devUpdateachievementsInput | $Enums.Achievements[]
-    enabled?: BoolFieldUpdateOperationsInput | boolean
+    education?: devUpdateeducationInput | string[]
+    positions?: devUpdatepositionsInput | string[]
+    workExp?: NullableIntFieldUpdateOperationsInput | number | null
+    workPlaces?: devUpdateworkPlacesInput | string[]
+    otherLinks?: devUpdateotherLinksInput | string[]
   }
 
   export type devUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
     unProvedSkills?: devUpdateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: devUpdateprovedSkillsInput | $Enums.Skills[]
-    achievements?: devUpdateachievementsInput | $Enums.Achievements[]
-    enabled?: BoolFieldUpdateOperationsInput | boolean
+    education?: devUpdateeducationInput | string[]
+    positions?: devUpdatepositionsInput | string[]
+    workExp?: NullableIntFieldUpdateOperationsInput | number | null
+    workPlaces?: devUpdateworkPlacesInput | string[]
+    otherLinks?: devUpdateotherLinksInput | string[]
   }
 
   export type devCreateManyInput = {
     id?: string
-    authorId: string
+    userId: string
     name: string
     body: string
+    enabled?: boolean
     unProvedSkills?: devCreateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: devCreateprovedSkillsInput | $Enums.Skills[]
-    achievements?: devCreateachievementsInput | $Enums.Achievements[]
-    enabled?: boolean
+    education?: devCreateeducationInput | string[]
+    positions?: devCreatepositionsInput | string[]
+    workExp?: number | null
+    workPlaces?: devCreateworkPlacesInput | string[]
+    otherLinks?: devCreateotherLinksInput | string[]
   }
 
   export type devUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
     unProvedSkills?: devUpdateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: devUpdateprovedSkillsInput | $Enums.Skills[]
-    achievements?: devUpdateachievementsInput | $Enums.Achievements[]
-    enabled?: BoolFieldUpdateOperationsInput | boolean
+    education?: devUpdateeducationInput | string[]
+    positions?: devUpdatepositionsInput | string[]
+    workExp?: NullableIntFieldUpdateOperationsInput | number | null
+    workPlaces?: devUpdateworkPlacesInput | string[]
+    otherLinks?: devUpdateotherLinksInput | string[]
   }
 
   export type devUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
     unProvedSkills?: devUpdateunProvedSkillsInput | $Enums.Skills[]
     provedSkills?: devUpdateprovedSkillsInput | $Enums.Skills[]
-    achievements?: devUpdateachievementsInput | $Enums.Achievements[]
-    enabled?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type devsIdCollectionCreateInput = {
-    devId: string
-  }
-
-  export type devsIdCollectionUncheckedCreateInput = {
-    devId: string
-  }
-
-  export type devsIdCollectionUpdateInput = {
-    devId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type devsIdCollectionUncheckedUpdateInput = {
-    devId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type devsIdCollectionCreateManyInput = {
-    devId: string
-  }
-
-  export type devsIdCollectionUpdateManyMutationInput = {
-    devId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type devsIdCollectionUncheckedUpdateManyInput = {
-    devId?: StringFieldUpdateOperationsInput | string
+    education?: devUpdateeducationInput | string[]
+    positions?: devUpdatepositionsInput | string[]
+    workExp?: NullableIntFieldUpdateOperationsInput | number | null
+    workPlaces?: devUpdateworkPlacesInput | string[]
+    otherLinks?: devUpdateotherLinksInput | string[]
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -3048,6 +2184,11 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type EnumSkillsNullableListFilter<$PrismaModel = never> = {
     equals?: $Enums.Skills[] | ListEnumSkillsFieldRefInput<$PrismaModel> | null
     has?: $Enums.Skills | EnumSkillsFieldRefInput<$PrismaModel> | null
@@ -3056,44 +2197,69 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
-  export type EnumAchievementsNullableListFilter<$PrismaModel = never> = {
-    equals?: $Enums.Achievements[] | ListEnumAchievementsFieldRefInput<$PrismaModel> | null
-    has?: $Enums.Achievements | EnumAchievementsFieldRefInput<$PrismaModel> | null
-    hasEvery?: $Enums.Achievements[] | ListEnumAchievementsFieldRefInput<$PrismaModel>
-    hasSome?: $Enums.Achievements[] | ListEnumAchievementsFieldRefInput<$PrismaModel>
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
     isEmpty?: boolean
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type devCountOrderByAggregateInput = {
     id?: SortOrder
-    authorId?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     body?: SortOrder
+    enabled?: SortOrder
     unProvedSkills?: SortOrder
     provedSkills?: SortOrder
-    achievements?: SortOrder
-    enabled?: SortOrder
+    education?: SortOrder
+    positions?: SortOrder
+    workExp?: SortOrder
+    workPlaces?: SortOrder
+    otherLinks?: SortOrder
+  }
+
+  export type devAvgOrderByAggregateInput = {
+    workExp?: SortOrder
   }
 
   export type devMaxOrderByAggregateInput = {
     id?: SortOrder
-    authorId?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     body?: SortOrder
     enabled?: SortOrder
+    workExp?: SortOrder
   }
 
   export type devMinOrderByAggregateInput = {
     id?: SortOrder
-    authorId?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     body?: SortOrder
     enabled?: SortOrder
+    workExp?: SortOrder
+  }
+
+  export type devSumOrderByAggregateInput = {
+    workExp?: SortOrder
   }
 
   export type UuidWithAggregatesFilter<$PrismaModel = never> = {
@@ -3137,16 +2303,20 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type devsIdCollectionCountOrderByAggregateInput = {
-    devId?: SortOrder
-  }
-
-  export type devsIdCollectionMaxOrderByAggregateInput = {
-    devId?: SortOrder
-  }
-
-  export type devsIdCollectionMinOrderByAggregateInput = {
-    devId?: SortOrder
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type devCreateunProvedSkillsInput = {
@@ -3157,12 +2327,28 @@ export namespace Prisma {
     set: $Enums.Skills[]
   }
 
-  export type devCreateachievementsInput = {
-    set: $Enums.Achievements[]
+  export type devCreateeducationInput = {
+    set: string[]
+  }
+
+  export type devCreatepositionsInput = {
+    set: string[]
+  }
+
+  export type devCreateworkPlacesInput = {
+    set: string[]
+  }
+
+  export type devCreateotherLinksInput = {
+    set: string[]
   }
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type devUpdateunProvedSkillsInput = {
@@ -3175,13 +2361,32 @@ export namespace Prisma {
     push?: $Enums.Skills | $Enums.Skills[]
   }
 
-  export type devUpdateachievementsInput = {
-    set?: $Enums.Achievements[]
-    push?: $Enums.Achievements | $Enums.Achievements[]
+  export type devUpdateeducationInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
+  export type devUpdatepositionsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type devUpdateworkPlacesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type devUpdateotherLinksInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -3212,6 +2417,17 @@ export namespace Prisma {
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedUuidWithAggregatesFilter<$PrismaModel = never> = {
@@ -3264,6 +2480,33 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
 
 
   /**
@@ -3273,10 +2516,6 @@ export namespace Prisma {
      * @deprecated Use devDefaultArgs instead
      */
     export type devArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = devDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use devsIdCollectionDefaultArgs instead
-     */
-    export type devsIdCollectionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = devsIdCollectionDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
