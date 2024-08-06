@@ -10,7 +10,7 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   const app = await NestFactory.create(AuthModule);
   const configService = app.get(ConfigService);
-  const port = configService.get('PORT');
+  const port = 3001;
   const sentryService = app.get(SentryService);
   const reflector = new Reflector();
 
@@ -19,7 +19,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalGuards(new AtGuard(reflector));
   app.useGlobalFilters(new AllExceptionsFilter(sentryService));
-
+  console.log(`container is running on ${port}`);
   await app.listen(port);
 }
 bootstrap();

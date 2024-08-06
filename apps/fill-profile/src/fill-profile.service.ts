@@ -1,5 +1,5 @@
 import { Injectable, Logger, Inject } from '@nestjs/common';
-import { PrismaServiceUsers } from '@app/common';
+import { PrismaServiceUsers } from '@app/database/users/prisma.users.service';
 import { Cache } from 'cache-manager';
 import { PersonalInfoDto } from './dto/personal-info.dto';
 import { SkillsDto } from './dto/skills.dto';

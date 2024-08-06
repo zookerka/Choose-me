@@ -1,12 +1,11 @@
 import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
-import { PrismaServiceUsers } from '@app/common';
+import { PrismaServiceUsers } from '@app/database/users/prisma.users.service';
 import { AuthSignupDto } from './dto/auth.signup.dto';
 import * as argon from 'argon2';
-import { Tokens } from '../../../libs/common/src/types/tokens.type';
+import { Tokens } from '@app/common/types/tokens.type';
 import { JwtService } from '@nestjs/jwt';
 import { AuthSigninDto } from './dto/auth.signin.dto';
 import { JwtPayload } from '@app/common';
-import { Skills } from 'prisma.db/generated/clientUsers';
 import { User } from 'prisma.db/generated/clientUsers';
 import { ConfigService } from '@nestjs/config';
 
@@ -98,8 +97,6 @@ export class AuthService {
           hash: hash,
         },
       });
-      // everything here is by default, but for clarity put here default data.
-      // you can check default data in backend/prisma.db/schemaUsers.prisma
       const newProfile = await this.prismaServiceUsers.profile.create({
         data: {
           workPlaces: [],

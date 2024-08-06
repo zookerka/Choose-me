@@ -4,7 +4,9 @@ import { FillProfileService } from './fill-profile.service';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { AllExceptionsFilter } from 'libs/common/sentry/all-exceptions.filter';
 import { SentryService } from 'libs/common/sentry/sentry.service';
-import { AtStrategy, PrismaModule } from '@app/common';
+import { AtStrategy } from '@app/common';
+import { PrismaModuleUsers } from '@app/database/users/prisma.users.module';
+import { PrismaModuleDevs } from '@app/database/devs/prisma.devs.module';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
@@ -17,6 +19,7 @@ import { redisStore } from 'cache-manager-redis-yet';
       useFactory: async () => ({
         store: await redisStore({
           socket: {
+            // change port and host for config variables.
             host: 'localhost',
             port: 6379,
           },
@@ -24,7 +27,8 @@ import { redisStore } from 'cache-manager-redis-yet';
       }),
     }),
     JwtModule.register({}),
-    PrismaModule,
+    PrismaModuleDevs,
+    PrismaModuleUsers,
     ConfigModule.forRoot({
       envFilePath: ['.env', 'apps/fill-profile/.env'],
     }),

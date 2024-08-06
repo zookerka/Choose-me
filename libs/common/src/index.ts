@@ -1,5 +1,3 @@
-export * from './db/prisma.service';
-export * from './db/prisma.module';
 export * from './guards/at.guard';
 export * from './decorators/get.current.user.decorator';
 export * from './decorators/get.current.user.id.decorator';
