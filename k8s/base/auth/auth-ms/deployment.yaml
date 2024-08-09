@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+  namespace: auth
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: sparkle788/auth:latest
+          ports:
+            - containerPort: 3001
+          resources:
+            requests:
+              memory: '256Mi'
+              cpu: '500m'
+            limits:
+              memory: '512Mi'
+              cpu: '1000m'
+          env:
+            - name: SENTRY_DSN
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-config
+                  key: SENTRY_DSN
+            - name: USERS_DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: auth-secret
+                  key: USERS_DB_URL
+            - name: RT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-secret
+                  key: RT_SECRET
+            - name: AT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-secret
+                  key: AT_SECRET

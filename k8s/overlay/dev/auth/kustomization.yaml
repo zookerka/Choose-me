@@ -1,0 +1,19 @@
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - secret.yaml
+  - ingress.yaml
+  - auth-ms
+
+namespace: auth
+
+# Specify that the ConfigMap and Secret should be generated from the files
+configMapGenerator:
+  - name: auth-config
+    files:
+      - configmap.yaml
+
+secretGenerator:
+  - name: auth-secret
+    files:
+      - secret.yaml

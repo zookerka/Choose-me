@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fill-profile-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: 'nginx'
+spec:
+  rules:
+    - host: chooseme.local
+      http:
+        paths:
+          - path: /fill-profile
+            pathType: Prefix
+            backend:
+              service:
+                name: fill-profile-service
+                port:
+                  number: 80

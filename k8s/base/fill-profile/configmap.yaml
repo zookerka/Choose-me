@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fill-profile-config
+  namespace: fill-profile
+data:
+  SENTRY_DSN: 'https://1af6e1135592fb18e0aaab60d6c5b59a@o4507304335638528.ingest.de.sentry.io/4507580574203984'
