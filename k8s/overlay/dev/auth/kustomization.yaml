@@ -1,19 +1,11 @@
+namespace: auth-dev
+
 resources:
-  - namespace.yaml
-  - configmap.yaml
-  - secret.yaml
-  - ingress.yaml
-  - auth-ms
+  - ../../../base/auth
 
-namespace: auth
-
-# Specify that the ConfigMap and Secret should be generated from the files
-configMapGenerator:
-  - name: auth-config
-    files:
-      - configmap.yaml
-
-secretGenerator:
-  - name: auth-secret
-    files:
-      - secret.yaml
+patches:
+  - target:
+      kind: Deployment
+      name: auth-deployment
+      namespace: auth
+    path: auth-ms/deployment-patch.yaml
