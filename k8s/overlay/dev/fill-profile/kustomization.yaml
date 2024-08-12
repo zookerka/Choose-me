@@ -1,20 +1,15 @@
 resources:
-  - namespace.yaml
-  - configmap.yaml
-  - secret.yaml
-  - ingress.yaml
-  - fill-profile
-  - redis
+  - ../../../base/fill-profile
 
-namespace: fill-profile
+patches:
+  - target:
+      kind: Deployment
+      name: fill-profile-deployment
+    path: fill-profile-ms/deployment-patch.yaml
 
-# Specify that the ConfigMap and Secret should be generated from the files
-configMapGenerator:
-  - name: fill-profile-config
-    files:
-      - configmap.yaml
+  - target:
+      kind: Deployment
+      name: redis-deployment
+    path: redis/deployment-patch.yaml
 
-secretGenerator:
-  - name: fill-profile-secret
-    files:
-      - secret.yaml
+namespace: fill-profile-dev

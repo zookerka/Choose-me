@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fill-profile-deployment
-  namespace: fill-profile
 spec:
   replicas: 3
   selector:
@@ -15,9 +14,9 @@ spec:
     spec:
       containers:
         - name: fill-profile
-          image: sparkle788/auth:latest
+          image: sparkle788/fill-profile:latest
           ports:
-            - containerPort: 3001
+            - containerPort: 3003
           resources:
             requests:
               memory: '256Mi'
@@ -36,6 +35,12 @@ spec:
                 secretKeyRef:
                   name: fill-profile-secret
                   key: USERS_DB_URL
+            - name: DEVS_DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: fill-profile-secret
+                  key: DEVS_DB_URL
+
             - name: RT_SECRET
               valueFrom:
                 secretKeyRef:

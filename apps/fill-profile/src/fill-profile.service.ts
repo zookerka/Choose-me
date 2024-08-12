@@ -29,7 +29,7 @@ export class FillProfileService {
     const existingData =
       (await this.cacheManager.get<Record<string, any>>(cacheKey)) || {};
     existingData[key] = data;
-    await this.cacheManager.set(cacheKey, existingData, 604800000 /* 7 days*/);
+    await this.cacheManager.set(cacheKey, existingData, 6048000 /* 7 days*/);
   }
 
   async fillPersonalInformation(

@@ -20,7 +20,7 @@ import { redisStore } from 'cache-manager-redis-yet';
         store: await redisStore({
           socket: {
             // change port and host for config variables.
-            host: 'localhost',
+            host: 'redis-service',
             port: 6379,
           },
         }),

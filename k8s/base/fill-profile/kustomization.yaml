@@ -1,20 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
 resources:
-  - namespace.yaml
+  - redis
+  - fill-profile-ms
   - configmap.yaml
   - secret.yaml
-  - ingress.yaml
-  - fill-profile
-  - redis
 
-namespace: fill-profile
-
-# Specify that the ConfigMap and Secret should be generated from the files
-configMapGenerator:
-  - name: fill-profile-config
-    files:
-      - configmap.yaml
-
-secretGenerator:
-  - name: fill-profile-secret
-    files:
-      - secret.yaml
+namespace: auth

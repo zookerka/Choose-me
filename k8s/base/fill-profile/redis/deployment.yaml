@@ -1,10 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-deployment
-  namespace: redis
+  name: redis
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: redis
@@ -15,9 +14,9 @@ spec:
     spec:
       containers:
         - name: redis
-          image: sparkle788/auth:latest
+          image: redis:latest
           ports:
-            - containerPort: 3001
+            - containerPort: 6379
           resources:
             requests:
               memory: '256Mi'
@@ -25,24 +24,3 @@ spec:
             limits:
               memory: '512Mi'
               cpu: '1000m'
-          env:
-            - name: SENTRY_DSN
-              valueFrom:
-                configMapKeyRef:
-                  name: fill-profile-config
-                  key: SENTRY_DSN
-            - name: USERS_DB_URL
-              valueFrom:
-                secretKeyRef:
-                  name: fill-profile-secret
-                  key: USERS_DB_URL
-            - name: RT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: fill-profile-secret
-                  key: RT_SECRET
-            - name: AT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: redis-secret
-                  key: AT_SECRET
