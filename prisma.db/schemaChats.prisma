@@ -13,17 +13,18 @@ datasource chats {
 
 
 model Room {
-  id        String      @id @default(cuid())
+  id        String      @id @default(uuid()) @chats.Uuid
   users     String[]      
   messages  Message[]
 }
 
 model Message {
-  id        String      @id @default(cuid())
+  id        String      @id @default(uuid()) @chats.Uuid
   message   String
   from_id   String
   to_id     String
   room      Room        @relation(fields: [roomId], references: [id])
-  roomId    String
+  roomId    String      
   image     Boolean     @default(false)
+  createdAt DateTime    @default(now())
 }

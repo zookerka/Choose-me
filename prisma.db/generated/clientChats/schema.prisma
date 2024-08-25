@@ -1,29 +1,28 @@
 generator client {
-  provider = "prisma-client-js"
-  output = "./generated/clientChats"
+  provider      = "prisma-client-js"
+  output        = "./generated/clientChats"
   binaryTargets = ["native", "debian-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
 }
 
-
 datasource chats {
-  provider = "postgresql"
-  url      = env("CHATS_DB_URL")
+  provider  = "postgresql"
+  url       = env("CHATS_DB_URL")
   directUrl = env("CHATS_DIRECT_URL")
 }
 
-
 model Room {
-  id        String      @id @default(cuid())
-  users     String[]      
-  messages  Message[]
+  id       String    @id @default(uuid()) @chats.Uuid
+  users    String[]
+  messages Message[]
 }
 
 model Message {
-  id        String      @id @default(cuid())
+  id        String   @id @default(uuid()) @chats.Uuid
   message   String
   from_id   String
   to_id     String
-  room      Room        @relation(fields: [roomId], references: [id])
+  room      Room     @relation(fields: [roomId], references: [id])
   roomId    String
-  image     Boolean     @default(false)
+  image     Boolean  @default(false)
+  createdAt DateTime @default(now())
 }

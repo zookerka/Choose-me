@@ -21,7 +21,8 @@ const {
   warnOnce,
   defineDmmfProperty,
   Public,
-} = require('./runtime/library')
+  getRuntime
+} = require('./runtime/library.js')
 
 
 const Prisma = {}
@@ -30,12 +31,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.6.0
- * Query Engine version: e95e739751f42d8ca026f6b910f5a2dc5adeaeee
+ * Prisma Client JS version: 5.18.0
+ * Query Engine version: 4c784e32044a8a016d99474bd02a3b6123742169
  */
 Prisma.prismaVersion = {
-  client: "5.6.0",
-  engine: "e95e739751f42d8ca026f6b910f5a2dc5adeaeee"
+  client: "5.18.0",
+  engine: "4c784e32044a8a016d99474bd02a3b6123742169"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -163,6 +164,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
+    "sourceFilePath": "C:\\work\\chooseMe\\backend\\prisma.db\\schemaDevs.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -170,8 +172,8 @@ const config = {
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "5.6.0",
-  "engineVersion": "e95e739751f42d8ca026f6b910f5a2dc5adeaeee",
+  "clientVersion": "5.18.0",
+  "engineVersion": "4c784e32044a8a016d99474bd02a3b6123742169",
   "datasourceNames": [
     "devs"
   ],
@@ -185,9 +187,9 @@ const config = {
       }
     }
   },
-  "inlineSchema": "Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyID0gInByaXNtYS1jbGllbnQtanMiDQogIG91dHB1dCA9ICIuL2dlbmVyYXRlZC9jbGllbnREZXZzIg0KICBiaW5hcnlUYXJnZXRzID0gWyJuYXRpdmUiLCAiZGViaWFuLW9wZW5zc2wtMy4wLngiLCAibGludXgtbXVzbC1vcGVuc3NsLTMuMC54Il0NCn0NCg0KDQpkYXRhc291cmNlIGRldnMgew0KICBwcm92aWRlciA9ICJwb3N0Z3Jlc3FsIg0KICB1cmwgICAgICA9IGVudigiREVWU19EQl9VUkwiKQ0KICBkaXJlY3RVcmwgPSBlbnYoIkRFVlNfRElSRUNUX1VSTCIpDQp9DQoNCg0KbW9kZWwgZGV2IHsNCiAgaWQgICAgICAgICAgICAgICAgU3RyaW5nICAgIEBpZCBAZGVmYXVsdCh1dWlkKCkpIEBkZXZzLlV1aWQNCiAgdXNlcklkICAgICAgICAgICAgU3RyaW5nICAgIEB1bmlxdWUNCiAgbmFtZSAgICAgICAgICAgICAgU3RyaW5nDQogIGJvZHkgICAgICAgICAgICAgIFN0cmluZw0KICBlbmFibGVkICAgICAgICAgICBCb29sZWFuICAgQGRlZmF1bHQodHJ1ZSkNCiAgdW5Qcm92ZWRTa2lsbHMgICAgU2tpbGxzW10NCiAgcHJvdmVkU2tpbGxzICAgICAgU2tpbGxzW10NCiAgZWR1Y2F0aW9uICAgICAgICAgU3RyaW5nW10NCiAgcG9zaXRpb25zICAgICAgICAgU3RyaW5nW10NCiAgd29ya0V4cCAgICAgICAgICAgSW50Pw0KICB3b3JrUGxhY2VzICAgICAgICBTdHJpbmdbXQ0KICBvdGhlckxpbmtzICAgICAgICBTdHJpbmdbXQ0KDQp9DQoNCg0KZW51bSBTa2lsbHMgew0KICBub1NraWxscw0KICBweXRob24NCiAgamF2YQ0KICBnbw0KICBrb3RsaW4NCiAgY3BwDQogIGphdmFzY3JpcHQNCiAgdHlwZXNjcmlwdA0KfQ==",
-  "inlineSchemaHash": "c539094dc6dc0bcb4bd754028e95d925cd64bbd72d15761b46dc54d3ac4a82c4",
-  "noEngine": false
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"./generated/clientDevs\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\", \"linux-musl-openssl-3.0.x\"]\n}\n\ndatasource devs {\n  provider  = \"postgresql\"\n  url       = env(\"DEVS_DB_URL\")\n  directUrl = env(\"DEVS_DIRECT_URL\")\n}\n\nmodel dev {\n  id             String   @id @default(uuid()) @devs.Uuid\n  userId         String   @unique\n  name           String\n  body           String\n  enabled        Boolean  @default(true)\n  unProvedSkills Skills[]\n  provedSkills   Skills[]\n  education      String[]\n  positions      String[]\n  workExp        Int?\n  workPlaces     String[]\n  otherLinks     String[]\n}\n\nenum Skills {\n  noSkills\n  python\n  java\n  go\n  kotlin\n  cpp\n  javascript\n  typescript\n}\n",
+  "inlineSchemaHash": "ea960058813286b8a90b9a6fb650f657793ec6bfe3e3e6b873b1832930815b1c",
+  "copyEngine": true
 }
 
 const fs = require('fs')
@@ -207,12 +209,12 @@ if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {
   config.isBundled = true
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"dev\":{\"dbName\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"default\":{\"name\":\"uuid\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"userId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":true,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"name\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"body\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"enabled\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Boolean\",\"default\":true,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"unProvedSkills\",\"kind\":\"enum\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Skills\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"provedSkills\",\"kind\":\"enum\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Skills\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"education\",\"kind\":\"scalar\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"positions\",\"kind\":\"scalar\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"workExp\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"workPlaces\",\"kind\":\"scalar\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"otherLinks\",\"kind\":\"scalar\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false}},\"enums\":{\"Skills\":{\"values\":[{\"name\":\"noSkills\",\"dbName\":null},{\"name\":\"python\",\"dbName\":null},{\"name\":\"java\",\"dbName\":null},{\"name\":\"go\",\"dbName\":null},{\"name\":\"kotlin\",\"dbName\":null},{\"name\":\"cpp\",\"dbName\":null},{\"name\":\"javascript\",\"dbName\":null},{\"name\":\"typescript\",\"dbName\":null}],\"dbName\":null}},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"dev\":{\"dbName\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"default\":{\"name\":\"uuid(4)\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"userId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":true,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"name\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"body\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"enabled\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Boolean\",\"default\":true,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"unProvedSkills\",\"kind\":\"enum\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Skills\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"provedSkills\",\"kind\":\"enum\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Skills\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"education\",\"kind\":\"scalar\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"positions\",\"kind\":\"scalar\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"workExp\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"workPlaces\",\"kind\":\"scalar\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"otherLinks\",\"kind\":\"scalar\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false}},\"enums\":{\"Skills\":{\"values\":[{\"name\":\"noSkills\",\"dbName\":null},{\"name\":\"python\",\"dbName\":null},{\"name\":\"java\",\"dbName\":null},{\"name\":\"go\",\"dbName\":null},{\"name\":\"kotlin\",\"dbName\":null},{\"name\":\"cpp\",\"dbName\":null},{\"name\":\"javascript\",\"dbName\":null},{\"name\":\"typescript\",\"dbName\":null}],\"dbName\":null}},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
-config.getQueryEngineWasmModule = undefined
+config.engineWasm = undefined
 
 
-const { warnEnvConflicts } = require('./runtime/library')
+const { warnEnvConflicts } = require('./runtime/library.js')
 
 warnEnvConflicts({
     rootEnvPath: config.relativeEnvPaths.rootEnvPath && path.resolve(config.dirname, config.relativeEnvPaths.rootEnvPath),

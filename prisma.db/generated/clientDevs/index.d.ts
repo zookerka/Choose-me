@@ -3,7 +3,7 @@
  * Client
 **/
 
-import * as runtime from './runtime/library';
+import * as runtime from './runtime/library.js';
 import $Types = runtime.Types // general types
 import $Public = runtime.Types.Public
 import $Utils = runtime.Types.Utils
@@ -57,8 +57,8 @@ export const Skills: typeof $Enums.Skills
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
  */
 export class PrismaClient<
-  T extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  U = 'log' extends keyof T ? T['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<T['log']> : never : never,
+  ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
+  U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
   ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
@@ -78,7 +78,7 @@ export class PrismaClient<
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
    */
 
-  constructor(optionsArg ?: Prisma.Subset<T, Prisma.PrismaClientOptions>);
+  constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
   $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): void;
 
   /**
@@ -162,7 +162,7 @@ export class PrismaClient<
   $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
 
 
-  $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>
+  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb, ExtArgs>
 
       /**
    * `prisma.dev`: Exposes CRUD operations for the **dev** model.
@@ -230,8 +230,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.6.0
-   * Query Engine version: e95e739751f42d8ca026f6b910f5a2dc5adeaeee
+   * Prisma Client JS version: 5.18.0
+   * Query Engine version: 4c784e32044a8a016d99474bd02a3b6123742169
    */
   export type PrismaVersion = {
     client: string
@@ -358,6 +358,11 @@ export namespace Prisma {
     include: any
   }
 
+  type SelectAndOmit = {
+    select: any
+    omit: any
+  }
+
   /**
    * Get the type of the value, that the Promise holds.
    */
@@ -406,7 +411,9 @@ export namespace Prisma {
   } &
     (T extends SelectAndInclude
       ? 'Please either choose `select` or `include`.'
-      : {})
+      : T extends SelectAndOmit
+        ? 'Please either choose `select` or `omit`.'
+        : {})
 
   /**
    * Subset + Intersection
@@ -653,79 +660,82 @@ export namespace Prisma {
     devs?: Datasource
   }
 
-
-  interface TypeMapCb extends $Utils.Fn<{extArgs: $Extensions.InternalArgs}, $Utils.Record<string, any>> {
-    returns: Prisma.TypeMap<this['params']['extArgs']>
+  interface TypeMapCb extends $Utils.Fn<{extArgs: $Extensions.InternalArgs, clientOptions: PrismaClientOptions }, $Utils.Record<string, any>> {
+    returns: Prisma.TypeMap<this['params']['extArgs'], this['params']['clientOptions']>
   }
 
-  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: 'dev'
+      modelProps: "dev"
       txIsolationLevel: Prisma.TransactionIsolationLevel
-    },
+    }
     model: {
       dev: {
         payload: Prisma.$devPayload<ExtArgs>
         fields: Prisma.devFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.devFindUniqueArgs<ExtArgs>,
+            args: Prisma.devFindUniqueArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$devPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.devFindUniqueOrThrowArgs<ExtArgs>,
+            args: Prisma.devFindUniqueOrThrowArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$devPayload>
           }
           findFirst: {
-            args: Prisma.devFindFirstArgs<ExtArgs>,
+            args: Prisma.devFindFirstArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$devPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.devFindFirstOrThrowArgs<ExtArgs>,
+            args: Prisma.devFindFirstOrThrowArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$devPayload>
           }
           findMany: {
-            args: Prisma.devFindManyArgs<ExtArgs>,
+            args: Prisma.devFindManyArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$devPayload>[]
           }
           create: {
-            args: Prisma.devCreateArgs<ExtArgs>,
+            args: Prisma.devCreateArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$devPayload>
           }
           createMany: {
-            args: Prisma.devCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
+            args: Prisma.devCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.devCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$devPayload>[]
           }
           delete: {
-            args: Prisma.devDeleteArgs<ExtArgs>,
+            args: Prisma.devDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$devPayload>
           }
           update: {
-            args: Prisma.devUpdateArgs<ExtArgs>,
+            args: Prisma.devUpdateArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$devPayload>
           }
           deleteMany: {
-            args: Prisma.devDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
+            args: Prisma.devDeleteManyArgs<ExtArgs>
+            result: BatchPayload
           }
           updateMany: {
-            args: Prisma.devUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
+            args: Prisma.devUpdateManyArgs<ExtArgs>
+            result: BatchPayload
           }
           upsert: {
-            args: Prisma.devUpsertArgs<ExtArgs>,
+            args: Prisma.devUpsertArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$devPayload>
           }
           aggregate: {
-            args: Prisma.DevAggregateArgs<ExtArgs>,
+            args: Prisma.DevAggregateArgs<ExtArgs>
             result: $Utils.Optional<AggregateDev>
           }
           groupBy: {
-            args: Prisma.devGroupByArgs<ExtArgs>,
+            args: Prisma.devGroupByArgs<ExtArgs>
             result: $Utils.Optional<DevGroupByOutputType>[]
           }
           count: {
-            args: Prisma.devCountArgs<ExtArgs>,
+            args: Prisma.devCountArgs<ExtArgs>
             result: $Utils.Optional<DevCountAggregateOutputType> | number
           }
         }
@@ -754,7 +764,7 @@ export namespace Prisma {
       }
     }
   }
-  export const defineExtension: $Extensions.ExtendsHook<'define', Prisma.TypeMapCb, $Extensions.DefaultArgs>
+  export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
   export type DefaultPrismaClient = PrismaClient
   export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
   export interface PrismaClientOptions {
@@ -787,7 +797,18 @@ export namespace Prisma {
      * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
      */
     log?: (LogLevel | LogDefinition)[]
+    /**
+     * The default values for transactionOptions
+     * maxWait ?= 2000
+     * timeout ?= 5000
+     */
+    transactionOptions?: {
+      maxWait?: number
+      timeout?: number
+      isolationLevel?: Prisma.TransactionIsolationLevel
+    }
   }
+
 
   /* Types for Logging */
   export type LogLevel = 'info' | 'query' | 'warn' | 'error'
@@ -825,6 +846,7 @@ export namespace Prisma {
     | 'findFirstOrThrow'
     | 'create'
     | 'createMany'
+    | 'createManyAndReturn'
     | 'update'
     | 'updateMany'
     | 'upsert'
@@ -1111,6 +1133,21 @@ export namespace Prisma {
     otherLinks?: boolean
   }, ExtArgs["result"]["dev"]>
 
+  export type devSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    body?: boolean
+    enabled?: boolean
+    unProvedSkills?: boolean
+    provedSkills?: boolean
+    education?: boolean
+    positions?: boolean
+    workExp?: boolean
+    workPlaces?: boolean
+    otherLinks?: boolean
+  }, ExtArgs["result"]["dev"]>
+
   export type devSelectScalar = {
     id?: boolean
     userId?: boolean
@@ -1147,11 +1184,10 @@ export namespace Prisma {
     composites: {}
   }
 
-
   type devGetPayload<S extends boolean | null | undefined | devDefaultArgs> = $Result.GetResult<Prisma.$devPayload, S>
 
   type devCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<devFindManyArgs, 'select' | 'include' | 'distinct' > & {
+    Omit<devFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: DevCountAggregateInputType | true
     }
 
@@ -1167,14 +1203,12 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-    **/
-    findUnique<T extends devFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, devFindUniqueArgs<ExtArgs>>
-    ): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+     */
+    findUnique<T extends devFindUniqueArgs>(args: SelectSubset<T, devFindUniqueArgs<ExtArgs>>): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one Dev that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Dev that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {devFindUniqueOrThrowArgs} args - Arguments to find a Dev
      * @example
      * // Get one Dev
@@ -1183,10 +1217,8 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-    **/
-    findUniqueOrThrow<T extends devFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, devFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+     */
+    findUniqueOrThrow<T extends devFindUniqueOrThrowArgs>(args: SelectSubset<T, devFindUniqueOrThrowArgs<ExtArgs>>): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
 
     /**
      * Find the first Dev that matches the filter.
@@ -1200,10 +1232,8 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-    **/
-    findFirst<T extends devFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, devFindFirstArgs<ExtArgs>>
-    ): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+     */
+    findFirst<T extends devFindFirstArgs>(args?: SelectSubset<T, devFindFirstArgs<ExtArgs>>): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
 
     /**
      * Find the first Dev that matches the filter or
@@ -1218,16 +1248,14 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-    **/
-    findFirstOrThrow<T extends devFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, devFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+     */
+    findFirstOrThrow<T extends devFindFirstOrThrowArgs>(args?: SelectSubset<T, devFindFirstOrThrowArgs<ExtArgs>>): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
 
     /**
      * Find zero or more Devs that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {devFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {devFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Devs
      * const devs = await prisma.dev.findMany()
@@ -1238,10 +1266,8 @@ export namespace Prisma {
      * // Only select the `id`
      * const devWithIdOnly = await prisma.dev.findMany({ select: { id: true } })
      * 
-    **/
-    findMany<T extends devFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, devFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, 'findMany'>>
+     */
+    findMany<T extends devFindManyArgs>(args?: SelectSubset<T, devFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, "findMany">>
 
     /**
      * Create a Dev.
@@ -1254,26 +1280,46 @@ export namespace Prisma {
      *   }
      * })
      * 
-    **/
-    create<T extends devCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, devCreateArgs<ExtArgs>>
-    ): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+     */
+    create<T extends devCreateArgs>(args: SelectSubset<T, devCreateArgs<ExtArgs>>): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, "create">, never, ExtArgs>
 
     /**
      * Create many Devs.
-     *     @param {devCreateManyArgs} args - Arguments to create many Devs.
-     *     @example
-     *     // Create many Devs
-     *     const dev = await prisma.dev.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {devCreateManyArgs} args - Arguments to create many Devs.
+     * @example
+     * // Create many Devs
+     * const dev = await prisma.dev.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
-    **/
-    createMany<T extends devCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, devCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
+     */
+    createMany<T extends devCreateManyArgs>(args?: SelectSubset<T, devCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Devs and returns the data saved in the database.
+     * @param {devCreateManyAndReturnArgs} args - Arguments to create many Devs.
+     * @example
+     * // Create many Devs
+     * const dev = await prisma.dev.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Devs and only return the `id`
+     * const devWithIdOnly = await prisma.dev.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends devCreateManyAndReturnArgs>(args?: SelectSubset<T, devCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, "createManyAndReturn">>
 
     /**
      * Delete a Dev.
@@ -1286,10 +1332,8 @@ export namespace Prisma {
      *   }
      * })
      * 
-    **/
-    delete<T extends devDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, devDeleteArgs<ExtArgs>>
-    ): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+     */
+    delete<T extends devDeleteArgs>(args: SelectSubset<T, devDeleteArgs<ExtArgs>>): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, "delete">, never, ExtArgs>
 
     /**
      * Update one Dev.
@@ -1305,10 +1349,8 @@ export namespace Prisma {
      *   }
      * })
      * 
-    **/
-    update<T extends devUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, devUpdateArgs<ExtArgs>>
-    ): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+     */
+    update<T extends devUpdateArgs>(args: SelectSubset<T, devUpdateArgs<ExtArgs>>): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, "update">, never, ExtArgs>
 
     /**
      * Delete zero or more Devs.
@@ -1321,10 +1363,8 @@ export namespace Prisma {
      *   }
      * })
      * 
-    **/
-    deleteMany<T extends devDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, devDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
+     */
+    deleteMany<T extends devDeleteManyArgs>(args?: SelectSubset<T, devDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Devs.
@@ -1342,10 +1382,8 @@ export namespace Prisma {
      *   }
      * })
      * 
-    **/
-    updateMany<T extends devUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, devUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
+     */
+    updateMany<T extends devUpdateManyArgs>(args: SelectSubset<T, devUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Dev.
@@ -1363,10 +1401,9 @@ export namespace Prisma {
      *     // ... the filter for the Dev we want to update
      *   }
      * })
-    **/
-    upsert<T extends devUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, devUpsertArgs<ExtArgs>>
-    ): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+     */
+    upsert<T extends devUpsertArgs>(args: SelectSubset<T, devUpsertArgs<ExtArgs>>): Prisma__devClient<$Result.GetResult<Prisma.$devPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
 
     /**
      * Count the number of Devs.
@@ -1506,30 +1543,29 @@ export namespace Prisma {
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export interface Prisma__devClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-
+    readonly [Symbol.toStringTag]: "PrismaPromise"
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
+
 
 
 
@@ -1553,7 +1589,6 @@ export namespace Prisma {
     
 
   // Custom InputTypes
-
   /**
    * dev findUnique
    */
@@ -1568,7 +1603,6 @@ export namespace Prisma {
     where: devWhereUniqueInput
   }
 
-
   /**
    * dev findUniqueOrThrow
    */
@@ -1582,7 +1616,6 @@ export namespace Prisma {
      */
     where: devWhereUniqueInput
   }
-
 
   /**
    * dev findFirst
@@ -1628,7 +1661,6 @@ export namespace Prisma {
     distinct?: DevScalarFieldEnum | DevScalarFieldEnum[]
   }
 
-
   /**
    * dev findFirstOrThrow
    */
@@ -1673,7 +1705,6 @@ export namespace Prisma {
     distinct?: DevScalarFieldEnum | DevScalarFieldEnum[]
   }
 
-
   /**
    * dev findMany
    */
@@ -1713,7 +1744,6 @@ export namespace Prisma {
     distinct?: DevScalarFieldEnum | DevScalarFieldEnum[]
   }
 
-
   /**
    * dev create
    */
@@ -1728,7 +1758,6 @@ export namespace Prisma {
     data: XOR<devCreateInput, devUncheckedCreateInput>
   }
 
-
   /**
    * dev createMany
    */
@@ -1740,6 +1769,20 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  /**
+   * dev createManyAndReturn
+   */
+  export type devCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the dev
+     */
+    select?: devSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many devs.
+     */
+    data: devCreateManyInput | devCreateManyInput[]
+    skipDuplicates?: boolean
+  }
 
   /**
    * dev update
@@ -1759,7 +1802,6 @@ export namespace Prisma {
     where: devWhereUniqueInput
   }
 
-
   /**
    * dev updateMany
    */
@@ -1773,7 +1815,6 @@ export namespace Prisma {
      */
     where?: devWhereInput
   }
-
 
   /**
    * dev upsert
@@ -1797,7 +1838,6 @@ export namespace Prisma {
     update: XOR<devUpdateInput, devUncheckedUpdateInput>
   }
 
-
   /**
    * dev delete
    */
@@ -1812,7 +1852,6 @@ export namespace Prisma {
     where: devWhereUniqueInput
   }
 
-
   /**
    * dev deleteMany
    */
@@ -1823,7 +1862,6 @@ export namespace Prisma {
     where?: devWhereInput
   }
 
-
   /**
    * dev without action
    */
@@ -1833,7 +1871,6 @@ export namespace Prisma {
      */
     select?: devSelect<ExtArgs> | null
   }
-
 
 
   /**

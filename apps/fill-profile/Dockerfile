@@ -23,6 +23,6 @@ COPY --from=build /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/dist ./dist
 
 
-EXPOSE 3003
+EXPOSE 3301
 
 CMD ["node", "dist/apps/fill-profile/main"]

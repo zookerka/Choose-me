@@ -20,6 +20,6 @@ async function bootstrap() {
   app.useGlobalGuards(new AtGuard(reflector));
   app.useGlobalFilters(new AllExceptionsFilter(sentryService));
 
-  await app.listen(port);
+  await app.listen(3301);
 }
 bootstrap();

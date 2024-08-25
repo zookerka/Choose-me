@@ -80,6 +80,60 @@
       "compilerOptions": {
         "tsConfigPath": "apps/fill-profile/tsconfig.app.json"
       }
+    },
+    "chats/gateway": {
+      "type": "application",
+      "root": "apps/chats/gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/chats/gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/chats/gateway/tsconfig.app.json"
+      }
+    },
+    "chats/messages": {
+      "type": "application",
+      "root": "apps/chats/messages",
+      "entryFile": "main",
+      "sourceRoot": "apps/chats/messages/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/chats/messages/tsconfig.app.json"
+      }
+    },
+    "chats/message-request": {
+      "type": "application",
+      "root": "apps/chats/message-request",
+      "entryFile": "main",
+      "sourceRoot": "apps/chats/message-request/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/chats/message-request/tsconfig.app.json"
+      }
+    },
+    "chats/create-conversation": {
+      "type": "application",
+      "root": "apps/chats/create-conversation",
+      "entryFile": "main",
+      "sourceRoot": "apps/chats/create-conversation/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/chats/create-conversation/tsconfig.app.json"
+      }
+    },
+    "notifications": {
+      "type": "application",
+      "root": "apps/notifications",
+      "entryFile": "main",
+      "sourceRoot": "apps/notifications/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/notifications/tsconfig.app.json"
+      }
+    },
+    "chats/rooms": {
+      "type": "application",
+      "root": "apps/chats/rooms",
+      "entryFile": "main",
+      "sourceRoot": "apps/chats/rooms/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/chats/rooms/tsconfig.app.json"
+      }
     }
   }
 }

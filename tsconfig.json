@@ -18,11 +18,21 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/common": ["libs/common/src/"],
-      "@app/common/*": ["libs/common/src/*"],
-      "@app/sentry": ["libs/sentry/*"],
-      "@app/config": ["libs/config/*"],
-      "@app/database/*": ["libs/common/db/src/*"]
+      "@app/common": [
+        "libs/common/src/"
+      ],
+      "@app/common/*": [
+        "libs/common/src/*"
+      ],
+      "@app/sentry": [
+        "libs/sentry/*"
+      ],
+      "@app/config": [
+        "libs/config/*"
+      ],
+      "@app/database/*": [
+        "libs/common/db/src/*"
+      ]
     }
   }
 }

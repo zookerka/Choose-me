@@ -4,14 +4,17 @@ import { DevsNewCardService } from './create-card.service';
 import { APP_FILTER } from '@nestjs/core';
 import { AllExceptionsFilter } from 'libs/common/sentry/all-exceptions.filter';
 import { SentryService } from 'libs/common/sentry/sentry.service';
-import { AtStrategy, PrismaModule } from '@app/common';
+import { AtStrategy } from '@app/common';
+import { PrismaModuleUsers } from '@app/database/users/prisma.users.module';
+import { PrismaModuleDevs } from '@app/database/devs/prisma.devs.module';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
     JwtModule.register({}),
-    PrismaModule,
+    PrismaModuleDevs,
+    PrismaModuleUsers,
     ConfigModule.forRoot({
       envFilePath: ['.env, apps/devs/create-card/.env'],
     }),

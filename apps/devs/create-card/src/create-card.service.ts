@@ -4,10 +4,9 @@ import {
   Injectable,
   Logger,
 } from '@nestjs/common';
-import { PrismaServiceDevs, PrismaServiceUsers } from '@app/common';
+import { PrismaServiceDevs } from '@app/database/devs/prisma.devs.service';
+import { PrismaServiceUsers } from '@app/database/users/prisma.users.service';
 import { CreateDevDto } from './dto/create.dev.dto';
-// import { Achievements, dev } from 'prisma.db/generated/clientDevs';
-// import { Skills } from 'prisma.db/generated/clientUsers';
 
 @Injectable()
 export class DevsNewCardService {
