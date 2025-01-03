@@ -22,3 +22,4 @@
 //       .expect('Hello World!');
 //   });
 // });
+// I too lazy to do tests :(
