@@ -6,14 +6,16 @@ This is basic back-end version without finished notifications and chats and some
 
 Here some basic info about this project:
 
-1. I use here Access and Refresh Token system for auth system
+1. Main framework here NestJS
 
 2. A gateway-based approach is used to implement chats
 
-3. For DB I've chosen PostgreSQL since it is most convenient and the best choice for this project
+3. For DB I've chosen PostgreSQL since it is most convenient and the best choice for this project (Prisma as ORM)
 
 4. I planned to migrate from github to gitlab for CI/CD inegrtion (which I will do btw)
 
 5. Sentry implemented here as common error handler
+
+6. I use here Access and Refresh Token system for auth system
 
 I'm not planning to monetize this project or smth, but pollish it. Maybe just 4fun I will even glue AI here.
