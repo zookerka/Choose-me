@@ -1,3 +1,5 @@
+ports for k8s
+
 auth: 30xx
 devs: 31xx
 fill-profile: 33xx
