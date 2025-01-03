@@ -1,6 +1,4 @@
-# Choose Me is the project where developers can express themselves in the most effective way, and the project where HR's can find any worker that they need (in IT realm)
-
-# Its main feature is a 'Card System,' which we found to be the most efficient way to create compact CVs showcasing achievements and skills. It also makes finding developers through specific tags much easier
+# Choose Me is the project where developers can express themselves in the most effective way, and the project where HR's can find any worker that they need (in IT realm) Its main feature is a 'Card System,' which we found to be the most efficient way to create compact CVs showcasing achievements and skills. It also makes finding developers through specific tags much easier
 
 This is basic back-end version without finished notifications and chats and some optimization issues. Unfortunately, this project hasn't been successful so far, which is why it may seem incomplete and why the backend is still a work in progress. However, I plan to complete the server with basic frontend to give it a more polished and professional appearance.
 
